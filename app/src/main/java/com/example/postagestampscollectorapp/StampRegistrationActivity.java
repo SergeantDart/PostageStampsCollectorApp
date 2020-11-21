@@ -32,8 +32,15 @@ public class StampRegistrationActivity extends AppCompatActivity {
     EditText stampNameEditText;
     EditText stampYearEditText;
     EditText stampDescriptionEditText;
-    ImageView stampImageView;
+    ImageView choiceImageView;
     Uri imageUri;
+
+    String name ;
+    Bitmap pic ;
+    int year;
+    String country ;
+    String description;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +51,7 @@ public class StampRegistrationActivity extends AppCompatActivity {
         stampYearEditText = (EditText) findViewById(R.id.stampYearEditText);
         stampCountrySpinner = (Spinner) findViewById(R.id.stampCountrySpinner);
         stampDescriptionEditText = (EditText) findViewById(R.id.stampDescriptionEditText);
-        stampImageView = (ImageView) findViewById(R.id.stampImageView);
+        choiceImageView = (ImageView) findViewById(R.id.choiceImageView);
 
 
         Locale[] locales = Locale.getAvailableLocales();
@@ -87,7 +94,8 @@ public class StampRegistrationActivity extends AppCompatActivity {
             try {
 
                 Bitmap stampPic = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
-                Toast.makeText(this, String.valueOf(imageUri), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, String.valueOf(imageUri), Toast.LENGTH_SHORT).show();
+                choiceImageView.setImageBitmap(stampPic);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -95,9 +103,7 @@ public class StampRegistrationActivity extends AppCompatActivity {
         }
     }
 
-
     public void addStamp(View v) {
-
 
     }
 }

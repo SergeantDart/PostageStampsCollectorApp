@@ -11,16 +11,16 @@ public class PostageStamp implements Parcelable {
     static int generatorNo = 100;
     int id;
     String name;
-    //Bitmap pic;
+    Bitmap pic;
     int year;
     String country;
     String description;
 
 
-    PostageStamp(String name, int year, String country, String description) {
+    PostageStamp(String name, Bitmap pic, int year, String country, String description) {
         this.id = generatorNo++;
         this.name = name;
-       // this.pic = BitmapFactory.decodeFile(picUrl);
+        this.pic = pic;
         this.year = year;
         this.country = country;
         this.description = description;
@@ -29,6 +29,7 @@ public class PostageStamp implements Parcelable {
     protected PostageStamp(Parcel in) {
         id = in.readInt();
         name = in.readString();
+        pic =in.readParcelable(null);
         year = in.readInt();
         country = in.readString();
         description = in.readString();
@@ -61,6 +62,7 @@ public class PostageStamp implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(id);
         dest.writeString(name);
+        dest.writeParcelable(pic, flags);
         dest.writeInt(year);
         dest.writeString(country);
         dest.writeString(description);

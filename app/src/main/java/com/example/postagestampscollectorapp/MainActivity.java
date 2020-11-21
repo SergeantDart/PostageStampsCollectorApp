@@ -3,6 +3,8 @@
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
@@ -46,8 +48,12 @@ public class MainActivity extends AppCompatActivity {
         stampCountrySpinner.setAdapter(countryAdapter);*/
 
         //listview layout
-        PostageStamp ps1 = new PostageStamp("John Lewis", 1919, "USA", "Baseball star");
-        PostageStamp ps2 = new PostageStamp("Dam Bridge", 2001, "USA", "famous US Landmarks");
+        Bitmap bm1 = BitmapFactory.decodeResource(getResources(), R.drawable.star_stamp);
+        Bitmap bm2 = BitmapFactory.decodeResource(getResources(), R.drawable.star_stamp);
+
+        PostageStamp ps1 = new PostageStamp("John Lewis", bm1,1919, "USA", "Baseball star");
+        PostageStamp ps2 = new PostageStamp("Dam Bridge", bm2,2001, "USA", "famous US Landmarks");
+
         stampsList.add(ps1);
         stampsList.add(ps2);
         stampsListView = (ListView) findViewById(R.id.stampsListView);

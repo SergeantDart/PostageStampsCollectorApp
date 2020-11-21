@@ -50,7 +50,7 @@ public class StampAdapter extends BaseAdapter {
         stampNameTextView.setText(stamp.name.toString());
         stampYearTextView.setText(String.valueOf(stamp.year));
         stampCountryTextView.setText(stamp.country.toString());
-        stampImageView.setImageResource(R.drawable.ic_launcher_background);
+        stampImageView.setImageBitmap(stamp.pic);
 
         return generatedView;
     }
