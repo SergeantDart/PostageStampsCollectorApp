@@ -1,4 +1,4 @@
-package com.example.postagestampscollectorapp;
+ package com.example.postagestampscollectorapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
