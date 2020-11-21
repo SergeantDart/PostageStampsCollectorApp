@@ -62,7 +62,7 @@ public class StampRegistrationActivity extends AppCompatActivity {
         stampYearEditText = (EditText) findViewById(R.id.stampYearEditText);
         stampCountrySpinner = (Spinner) findViewById(R.id.stampCountrySpinner);
         stampDescriptionEditText = (EditText) findViewById(R.id.stampDescriptionEditText);
-        stampImageView = (ImageView) findViewById(R.id.stampImageView);
+       // stampImageView = (ImageView) findViewById(R.id.stampImageView);
 
     }
 }
