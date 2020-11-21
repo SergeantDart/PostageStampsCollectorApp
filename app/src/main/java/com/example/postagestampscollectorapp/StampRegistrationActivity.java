@@ -84,7 +84,7 @@ public class StampRegistrationActivity extends AppCompatActivity {
             imageUri = data.getData();
             try {
                 Bitmap stampPic = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
-                //stampImageView.setImageBitmap(stampPic);
+                stampImageView.setImageBitmap(stampPic);
             } catch (IOException e) {
                 e.printStackTrace();
             }
