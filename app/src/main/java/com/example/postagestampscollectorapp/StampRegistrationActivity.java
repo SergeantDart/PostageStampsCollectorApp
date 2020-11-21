@@ -10,11 +10,13 @@ import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -80,11 +82,12 @@ public class StampRegistrationActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == ACCESS_GALLERY && resultCode == RESULT_OK) {
+        if (requestCode == ACCESS_GALLERY && resultCode == Activity.RESULT_OK) {
             imageUri = data.getData();
             try {
+
                 Bitmap stampPic = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
-                stampImageView.setImageBitmap(stampPic);
+                Toast.makeText(this, String.valueOf(imageUri), Toast.LENGTH_SHORT).show();
             } catch (IOException e) {
                 e.printStackTrace();
             }
