@@ -2,10 +2,14 @@ package com.example.postagestampscollectorapp;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
+
+import java.io.ByteArrayOutputStream;
 
 public class PostageStamp implements Parcelable {
     static int generatorNo = 100;
@@ -17,7 +21,7 @@ public class PostageStamp implements Parcelable {
     String description;
 
 
-    PostageStamp(String name, Bitmap pic, int year, String country, String description) {
+    PostageStamp(String name,  Bitmap pic, int year, String country, String description) {
         this.id = generatorNo++;
         this.name = name;
         this.pic = pic;
@@ -29,7 +33,10 @@ public class PostageStamp implements Parcelable {
     protected PostageStamp(Parcel in) {
         id = in.readInt();
         name = in.readString();
-        pic =in.readParcelable(null);
+        final int contentBytesLength = in.readInt();
+        byte[] contentBytes = new byte[contentBytesLength];
+        in.readByteArray(contentBytes);
+        pic = BitmapFactory.decodeByteArray(contentBytes, 0, contentBytes.length);
         year = in.readInt();
         country = in.readString();
         description = in.readString();
@@ -55,6 +62,7 @@ public class PostageStamp implements Parcelable {
     @NonNull
     @Override
     public String toString() {
+
         return super.toString();
     }
 
@@ -62,7 +70,11 @@ public class PostageStamp implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(id);
         dest.writeString(name);
-        dest.writeParcelable(pic, flags);
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        pic.compress(Bitmap.CompressFormat.JPEG, 20, stream);
+        byte[]byteArray = stream.toByteArray();
+        dest.writeInt(byteArray.length);
+        dest.writeByteArray(byteArray);
         dest.writeInt(year);
         dest.writeString(country);
         dest.writeString(description);

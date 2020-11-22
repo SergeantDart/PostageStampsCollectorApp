@@ -2,6 +2,9 @@
 package com.example.postagestampscollectorapp;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.List;
 
 public class StampAdapter extends BaseAdapter {
@@ -50,6 +54,7 @@ public class StampAdapter extends BaseAdapter {
         stampNameTextView.setText(stamp.name.toString());
         stampYearTextView.setText(String.valueOf(stamp.year));
         stampCountryTextView.setText(stamp.country.toString());
+
         stampImageView.setImageBitmap(stamp.pic);
 
         return generatedView;

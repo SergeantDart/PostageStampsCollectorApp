@@ -38,6 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="56dp"
+                android:onClick="addStamp"
                 android:padding="20dp"
                 android:text="Add stamp to your collection"
                 android:textSize="14sp"

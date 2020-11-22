@@ -28,19 +28,22 @@ import java.util.Locale;
 public class StampRegistrationActivity extends AppCompatActivity {
 
     final static int ACCESS_GALLERY = 1;
+
+    ArrayList<PostageStamp> stampsList;
     Spinner stampCountrySpinner;
     EditText stampNameEditText;
     EditText stampYearEditText;
     EditText stampDescriptionEditText;
     ImageView choiceImageView;
+
     Uri imageUri;
 
     String name ;
-    Bitmap pic ;
+    String picUri ;
     int year;
     String country ;
     String description;
-
+    Bitmap stampPic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +55,6 @@ public class StampRegistrationActivity extends AppCompatActivity {
         stampCountrySpinner = (Spinner) findViewById(R.id.stampCountrySpinner);
         stampDescriptionEditText = (EditText) findViewById(R.id.stampDescriptionEditText);
         choiceImageView = (ImageView) findViewById(R.id.choiceImageView);
-
 
         Locale[] locales = Locale.getAvailableLocales();
         ArrayList<String> countries = new ArrayList<String>();
@@ -68,8 +70,7 @@ public class StampRegistrationActivity extends AppCompatActivity {
             System.out.println(country);
         }
 
-        ArrayAdapter<String> countryAdapter = new ArrayAdapter<String>(getApplicationContext(),
-                R.layout.country_spinner_item, countries);
+        ArrayAdapter<String> countryAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.country_spinner_item, countries);
 
         countryAdapter.setDropDownViewResource(R.layout.country_spinner_item);
 
@@ -93,9 +94,10 @@ public class StampRegistrationActivity extends AppCompatActivity {
             imageUri = data.getData();
             try {
 
-                Bitmap stampPic = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
-                //Toast.makeText(this, String.valueOf(imageUri), Toast.LENGTH_SHORT).show();
+                stampPic = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
+                Toast.makeText(this, String.valueOf(imageUri), Toast.LENGTH_SHORT).show();
                 choiceImageView.setImageBitmap(stampPic);
+                picUri = imageUri.toString();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -104,6 +106,15 @@ public class StampRegistrationActivity extends AppCompatActivity {
     }
 
     public void addStamp(View v) {
-
+        name = stampNameEditText.getText().toString();
+        year = Integer.parseInt(stampYearEditText.getText().toString());
+        country = stampCountrySpinner.getSelectedItem().toString();
+        description = stampDescriptionEditText.getText().toString();
+        PostageStamp ps = new PostageStamp(name,stampPic,year,country,description);
+        Intent intent  =new Intent();
+        intent.putExtra("stamp",ps);
+        setResult(RESULT_OK, intent);
+        finish();
+        //Toast.makeText(this, "Stamp addes successfully !", Toast.LENGTH_SHORT).show();
     }
 }
