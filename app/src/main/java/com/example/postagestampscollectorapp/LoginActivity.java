@@ -33,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
                 if(user.equals("username") && passWord.equals("password")){
                     Toast.makeText(getApplicationContext(), "Redirecting..",
                             Toast.LENGTH_SHORT).show();
+
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
                 }

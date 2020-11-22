@@ -22,6 +22,7 @@
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
         android:textSize="24sp"
+        android:maxLength="15"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,6 +38,7 @@
         android:inputType="textPassword"
         android:selectAllOnFocus="true"
         android:textSize="24sp"
+        android:maxLength="15"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/passwordInfoTextView"
         app:layout_constraintTop_toBottomOf="@+id/usernameEditText" />
