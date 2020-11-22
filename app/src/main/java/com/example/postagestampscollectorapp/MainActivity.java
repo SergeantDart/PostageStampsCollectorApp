@@ -47,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void openCollectionCreationActivity(View v){
+        Intent intent = new Intent(getApplicationContext(), CollectionCreationActivity.class);
+        startActivityForResult(intent, 0);
+    }
 
     public void openStampRegistrationActivity(View v) {
         Intent intent = new Intent(getApplicationContext(), StampRegistrationActivity.class);

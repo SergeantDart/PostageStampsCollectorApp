@@ -95,7 +95,7 @@ public class StampRegistrationActivity extends AppCompatActivity {
             try {
 
                 stampPic = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
-                Toast.makeText(this, String.valueOf(imageUri), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, String.valueOf(imageUri), Toast.LENGTH_SHORT).show();
                 choiceImageView.setImageBitmap(stampPic);
                 picUri = imageUri.toString();
             } catch (IOException e) {
