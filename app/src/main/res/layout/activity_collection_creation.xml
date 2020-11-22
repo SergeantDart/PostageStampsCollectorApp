@@ -8,15 +8,140 @@
     android:backgroundTint="#E91E63"
     tools:context=".CollectionCreationActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#EFEBEB"
-        android:text="TextView"
-        android:textSize="24sp"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFC107"
+        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RadioGroup
+                android:id="@+id/accesabilityRadioGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                app:layout_constraintStart_toEndOf="@+id/isCollectionPublicTextView"
+                app:layout_constraintTop_toBottomOf="@+id/colectionNameEditText">
+
+                <RadioButton
+                    android:id="@+id/publicRadioButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Public"
+                    android:textColor="#151414"
+                    android:textSize="24sp" />
+
+                <RadioButton
+                    android:id="@+id/privateRadioButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:shadowColor="#070707"
+                    android:text="Private"
+                    android:textColor="#0B0A0A"
+                    android:textSize="24sp" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/isCollectionPublicTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="20dp"
+                android:text=" Accesability:"
+                android:textColor="#050505"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/infoCollectionNameTextView" />
+
+            <TextView
+                android:id="@+id/infoCollectionDescriptionTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="28dp"
+                android:text="Description:"
+                android:textColor="#121111"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/isCollectionPublicTextView" />
+
+            <EditText
+                android:id="@+id/colectionNameEditText"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="96dp"
+                android:ems="10"
+                android:hint="Enter name..."
+                android:inputType="textPersonName"
+                android:textColor="#070707"
+                android:textColorHint="?android:attr/textColorHint"
+                android:textSize="24sp"
+                app:layout_constraintStart_toEndOf="@+id/infoCollectionNameTextView"
+                app:layout_constraintTop_toBottomOf="@+id/infoCreateCollectionTextView" />
+
+            <TextView
+                android:id="@+id/infoCollectionNameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="112dp"
+                android:text="Collection name:"
+                android:textColor="#070707"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/infoCreateCollectionTextView" />
+
+            <EditText
+                android:id="@+id/collectionDescriptionEditText"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="71dp"
+                android:ems="10"
+                android:gravity="start|top"
+                android:hint="Describe collection..."
+                android:inputType="textMultiLine"
+                android:textColor="#131313"
+                android:textSize="24sp"
+                app:layout_constraintStart_toEndOf="@+id/infoCollectionDescriptionTextView"
+                app:layout_constraintTop_toBottomOf="@+id/accesabilityRadioGroup" />
+
+            <Button
+                android:id="@+id/createCollectionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="56dp"
+                android:onClick="createNewCollection"
+                android:text="Create collection"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/collectionDescriptionEditText" />
+
+            <TextView
+                android:id="@+id/infoCreateCollectionTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="64dp"
+                android:text="Create your very own collection !"
+                android:textAlignment="center"
+                android:textColor="#0C0C0C"
+                android:textSize="36sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

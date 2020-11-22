@@ -22,12 +22,11 @@
         android:id="@+id/stampsListView"
         android:layout_width="0dp"
         android:layout_height="414dp"
-        android:layout_marginTop="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addNewStampButton" />
+        app:layout_constraintTop_toBottomOf="@+id/collectionSpinner" />
 
     <Button
         android:id="@+id/addNewStampButton"
@@ -38,4 +37,16 @@
         android:text="Add new Stamp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/collectionSpinner"
+        android:layout_width="330dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="60dp"
+        android:background="#FFEB3B"
+        android:backgroundTint="#F44336"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/createNewCollectionButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>

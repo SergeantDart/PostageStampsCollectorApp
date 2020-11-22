@@ -59,11 +59,16 @@ public class PostageStamp implements Parcelable {
         return 0;
     }
 
-    @NonNull
     @Override
     public String toString() {
-
-        return super.toString();
+        return "PostageStamp{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", pic=" + pic +
+                ", year=" + year +
+                ", country='" + country + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 
     @Override
