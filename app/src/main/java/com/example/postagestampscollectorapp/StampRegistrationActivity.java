@@ -135,7 +135,9 @@ public class StampRegistrationActivity extends AppCompatActivity {
            else if(ok==0){
                 Toast.makeText(getApplicationContext(), "Add a picture of your stamp!", Toast.LENGTH_SHORT).show();
         }
-           else Toast.makeText(getApplicationContext(), "Incomplete data!", Toast.LENGTH_SHORT).show();
+           else {
+               Toast.makeText(getApplicationContext(), "Incomplete data!", Toast.LENGTH_SHORT).show();
+        }
 
 
     }

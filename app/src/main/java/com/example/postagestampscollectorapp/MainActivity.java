@@ -51,9 +51,9 @@ public class MainActivity extends AppCompatActivity {
         collectionsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                for(StampsCollection collection : collectionsList){
-                    if(collection.collectionName==collectionsSpinner.getSelectedItem().toString()){
-                        chosenCollection=collection;
+                for (StampsCollection collection : collectionsList) {
+                    if (collection.collectionName == collectionsSpinner.getSelectedItem().toString()) {
+                        chosenCollection = collection;
                         resetStampAdapter();
                     }
                 }
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-               //your code here
+                //your code here
             }
 
         });
@@ -71,9 +71,9 @@ public class MainActivity extends AppCompatActivity {
 
         PostageStamp ps1 = new PostageStamp("John Lewis", bm1, 1919, "USA", "Baseball star");
         PostageStamp ps2 = new PostageStamp("Dam Bridge", bm2, 2001, "USA", "famous US Landmarks");
-        PostageStamp ps3 = new PostageStamp("Zulu",bm1,1991,"Australia","a nice one");
-        PostageStamp ps4 = new PostageStamp("Margarets Flowers", bm1, 2002, "Romania" , "my favourite one");
-        PostageStamp ps5 = new PostageStamp("Hell's Riders",bm1,2010,"New Zeeland", "motorcycle club, very dangerous");
+        PostageStamp ps3 = new PostageStamp("Zulu", bm1, 1991, "Australia", "a nice one");
+        PostageStamp ps4 = new PostageStamp("Margarets Flowers", bm1, 2002, "Romania", "my favourite one");
+        PostageStamp ps5 = new PostageStamp("Hell's Riders", bm1, 2010, "New Zeeland", "motorcycle club, very dangerous");
 
         stampsList1.add(ps1);
         stampsList1.add(ps2);
@@ -82,46 +82,48 @@ public class MainActivity extends AppCompatActivity {
         stampsList2.add(ps5);
 
         StampsCollection sc1 = new StampsCollection("myCollection", stampsList1, true, "my collection is beautiful");
-        StampsCollection sc2 = new StampsCollection("myPreviousCollection", stampsList2,false,"this is for testing purposes only");
+        StampsCollection sc2 = new StampsCollection("myPreviousCollection", stampsList2, false, "this is for testing purposes only");
 
         collectionsList.add(sc1);
         collectionsList.add(sc2);
 
 
         stampsListView = (ListView) findViewById(R.id.stampsListView);
+
         chosenCollection = sc1;
 
 
         resetCollectionsNamesAdapter();
         resetStampAdapter();
 
-//        stampsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Intent intent = new Intent(getApplicationContext(),ViewStampByClickingActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-
+        stampsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(), ViewStampActivity.class);
+                PostageStamp stamp = chosenCollection.stampsList.get(position);
+                intent.putExtra("myStamp", stamp);
+                startActivity(intent);
+            }
+        });
 
     }
 
-    public void resetCollectionsNamesAdapter(){
+    public void resetCollectionsNamesAdapter() {
         collectionsNames = new ArrayList<String>();
 
         for (StampsCollection stampsCollection : collectionsList) {
             collectionsNames.add(stampsCollection.collectionName);
-            Toast.makeText(this, stampsCollection.collectionName, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, stampsCollection.collectionName, Toast.LENGTH_SHORT).show();
         }
 
         collectionsNamesAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, collectionsNames);
         collectionsSpinner.setAdapter(collectionsNamesAdapter);
 
     }
+
     public void resetStampAdapter() {
         stampAdapter = new StampAdapter(getApplicationContext(), chosenCollection.stampsList);
         stampsListView.setAdapter(stampAdapter);
-
     }
 
 
@@ -136,21 +138,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
     @Override
-    protected void onActivityResult(int requestCode, int resultCode,  @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == 0) {
             PostageStamp ps = data.getParcelableExtra("stamp");
             chosenCollection.stampsList.add(ps);
-            Toast.makeText(this, ps.toString(), Toast.LENGTH_LONG).show();
             stampAdapter.notifyDataSetChanged();
         } else if (resultCode == RESULT_OK && requestCode == 1) {
             StampsCollection collection = data.getParcelableExtra("collection");
             collectionsList.add(collection);
             resetCollectionsNamesAdapter();
-            Toast.makeText(this, collection.toString(), Toast.LENGTH_LONG).show();
         }
     }
 }

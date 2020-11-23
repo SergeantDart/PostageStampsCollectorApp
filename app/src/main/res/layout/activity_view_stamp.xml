@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ViewStampActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/currentStampImageView"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_marginTop="60dp"
+                android:scaleType="fitXY"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/infoCurrentStampNameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="40dp"
+                android:text="Name:"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/currentStampImageView" />
+
+            <TextView
+                android:id="@+id/infoCurrentStampYearTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="30dp"
+                android:text="Year:"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/infoCurrentStampNameTextView" />
+
+            <TextView
+                android:id="@+id/infoCurrentStampCountryTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="30dp"
+                android:text="Country:"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/infoCurrentStampYearTextView" />
+
+            <TextView
+                android:id="@+id/infoCurrentStampDescriptionTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="30dp"
+                android:text="Description:"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/infoCurrentStampCountryTextView" />
+
+            <EditText
+                android:id="@+id/currentStampNameEditText"
+                android:layout_width="225dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="72dp"
+                android:layout_marginTop="25dp"
+                android:cursorVisible="false"
+                android:inputType="none"
+                android:enabled="false"
+                android:ems="10"
+                android:textSize="24sp"
+                app:layout_constraintStart_toEndOf="@+id/infoCurrentStampNameTextView"
+                app:layout_constraintTop_toBottomOf="@+id/currentStampImageView" />
+
+            <EditText
+                android:id="@+id/currentStampYearEditText"
+                android:layout_width="225dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="88dp"
+                android:layout_marginTop="8dp"
+                android:inputType="none"
+                android:enabled="false"
+                android:ems="10"
+                android:textSize="24sp"
+                app:layout_constraintStart_toEndOf="@+id/infoCurrentStampYearTextView"
+                app:layout_constraintTop_toBottomOf="@+id/currentStampNameEditText" />
+
+            <EditText
+                android:id="@+id/currentStampCountryEditText"
+                android:layout_width="225dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="51dp"
+                android:layout_marginTop="10dp"
+                android:inputType="none"
+                android:enabled="false"
+                android:ems="10"
+                android:textSize="24sp"
+                app:layout_constraintStart_toEndOf="@+id/infoCurrentStampCountryTextView"
+                app:layout_constraintTop_toBottomOf="@+id/currentStampYearEditText" />
+
+            <EditText
+                android:id="@+id/currentStampDescriptionEditText"
+                android:layout_width="225dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:inputType="none"
+                android:enabled="false"
+                android:ems="10"
+                android:gravity="start|top"
+                android:textSize="24sp"
+                app:layout_constraintStart_toEndOf="@+id/infoCurrentStampDescriptionTextView"
+                app:layout_constraintTop_toBottomOf="@+id/currentStampCountryEditText" />
+
+            <Button
+                android:id="@+id/currentStampModifyButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="50dp"
+                android:text="MODIFY"
+                android:textSize="30sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/infoCurrentStampDescriptionTextView" />
+
+            <Button
+                android:id="@+id/currentStampDeleteButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="50dp"
+                android:text="DELETE"
+                android:textSize="30sp"
+                app:layout_constraintStart_toEndOf="@+id/currentStampModifyButton"
+                app:layout_constraintTop_toBottomOf="@+id/infoCurrentStampDescriptionTextView" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

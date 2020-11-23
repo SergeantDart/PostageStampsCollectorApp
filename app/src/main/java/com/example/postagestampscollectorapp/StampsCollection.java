@@ -21,7 +21,6 @@ public class StampsCollection implements Parcelable {
         in.readList(this.stampsList, PostageStamp.class.getClassLoader());
         this.isPrivate = in.readByte() != 0;
         this.collectionDescription = in.readString();
-
     }
 
     StampsCollection(String collectionName, ArrayList<PostageStamp> stampsList, boolean isPrivate, String collectionDescription) {
