@@ -11,7 +11,7 @@ public class User {
     String shortDesciption;
 
     public User(int userId, String username, String password, String email, String telephone, String shortDesciption) {
-        this.userId = userId;
+        this.userId = 10000;
         this.username = username;
         this.password = password;
         this.email = email;
