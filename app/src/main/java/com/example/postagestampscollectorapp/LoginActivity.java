@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
@@ -20,7 +21,9 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         EditText username=(EditText)findViewById(R.id.usernameEditText);
+        username.setText("username", TextView.BufferType.EDITABLE);
         EditText password=(EditText)findViewById(R.id.passwordEditText) ;
+        password.setText("password",TextView.BufferType.EDITABLE);
         Button blogin = (Button)findViewById(R.id.loginButton);
 
         blogin.setOnClickListener(new OnClickListener(){
