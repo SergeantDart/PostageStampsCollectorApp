@@ -38,8 +38,8 @@ public class CollectionCreationActivity extends AppCompatActivity {
     public void createNewCollection(View v){
 
         collectionNameEditText = (EditText) findViewById(R.id.colectionNameEditText);
-        collectionDescriptionEditText = (EditText) findViewById(R.id.colectionNameEditText);
-        collectionAccesabilitRadioGroup = (RadioGroup) findViewById(R.id.accesabilityRadioGroup);
+        collectionDescriptionEditText = (EditText) findViewById(R.id.collectionDescriptionEditText);
+        collectionAccesabilitRadioGroup = (RadioGroup) findViewById(R.id.collectionAccesabilityRadioGroup);
 
         collectionName = collectionNameEditText.getText().toString();
         collectionDescription = collectionDescriptionEditText.getText().toString();
@@ -50,16 +50,17 @@ public class CollectionCreationActivity extends AppCompatActivity {
         } else if (choice == "Public") {
             isPrivate = false;
         }
+       // else choice="";
 
-        Log.i("info",choice);
-
+        Log.i("inf",choice);
 
         //TRB SA LUCREZ AICI
-            if( !collectionName.equals("") && !collectionDescription.equals("") && !choice.equals("") ) {
+            if( !collectionName.equals("") && !collectionDescription.equals("") && collectionAccesabilitRadioGroup.getCheckedRadioButtonId() != -1) {
                 StampsCollection sc = new StampsCollection(collectionName, null, isPrivate, collectionDescription);
                 Intent intent = new Intent();
                 intent.putExtra("collection", sc);
                 setResult(RESULT_OK, intent);
+
 
                 finish();
                 Toast.makeText(getApplicationContext(), "Nice! You created a new collection!", Toast.LENGTH_SHORT).show();
@@ -67,11 +68,10 @@ public class CollectionCreationActivity extends AppCompatActivity {
             else if( collectionName.equals("") ){
                 Toast.makeText(getApplicationContext(), "Add a name to your collection!", Toast.LENGTH_SHORT).show();
             }
-           // else if(collectionDescription.equals("")){
-            //    Toast.makeText(getApplicationContext(), "Add a description to your collection!", Toast.LENGTH_SHORT).show();
-           // }
-            else if( choice.equals("") ){
-                Log.i("info",choice);
+            else if(collectionDescription.equals("")){
+                Toast.makeText(getApplicationContext(), "Add a description to your collection!", Toast.LENGTH_SHORT).show();
+            }
+            else if( collectionAccesabilitRadioGroup.getCheckedRadioButtonId() == -1){
                 Toast.makeText(getApplicationContext(), "Check an option!", Toast.LENGTH_SHORT).show();
             }
             else Toast.makeText(getApplicationContext(), "Incomplete data!", Toast.LENGTH_SHORT).show();
