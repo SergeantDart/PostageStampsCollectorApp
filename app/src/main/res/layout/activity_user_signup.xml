@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFEB3B"
+    tools:context=".UserSignupActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/infoTelephoneRegistrationTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="30dp"
+                android:text="Telephone:"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/infoEmailRegistrationTextView" />
+
+            <TextView
+                android:id="@+id/infoEmailRegistrationTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="30dp"
+                android:text="Email:"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/infoPasswordRegistrationTextview" />
+
+            <TextView
+                android:id="@+id/infoPasswordRegistrationTextview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="30dp"
+                android:text="Password:"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/infoUsernameRegistrationTextView" />
+
+            <TextView
+                android:id="@+id/infoUsernameRegistrationTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="30dp"
+                android:text="Username:"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/infoFullNameTextView" />
+
+            <TextView
+                android:id="@+id/infoFullNameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="56dp"
+                android:text="Full name:"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/infoSignupTextView" />
+
+            <Button
+                android:id="@+id/createNewAccountButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="40dp"
+                android:onClick="createNewAccount"
+                android:text="CREATE NEW ACCOUNT"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/shortBioRegistrationEditText" />
+
+            <TextView
+                android:id="@+id/infoSignupTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="44dp"
+                android:text="Create a new stamp collector user"
+                android:textAlignment="center"
+                android:textSize="36sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/passwordRegistrationEditText"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="37dp"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="Enter password..."
+                android:inputType="textPassword"
+                android:textSize="24sp"
+                app:layout_constraintStart_toEndOf="@+id/infoPasswordRegistrationTextview"
+                app:layout_constraintTop_toBottomOf="@+id/usernameRegistrationEditText" />
+
+            <EditText
+                android:id="@+id/fullNameRegistrationEditText"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="38dp"
+                android:ems="10"
+                android:hint="Enter full name..."
+                android:inputType="textPersonName"
+                android:textSize="24sp"
+                app:layout_constraintStart_toEndOf="@+id/infoFullNameTextView"
+                app:layout_constraintTop_toBottomOf="@+id/infoSignupTextView" />
+
+            <TextView
+                android:id="@+id/infoBioRegistrationTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="11dp"
+                android:layout_marginTop="30dp"
+                android:text="Short bio:"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/infoTelephoneRegistrationTextView" />
+
+            <EditText
+                android:id="@+id/shortBioRegistrationEditText"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="42dp"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:gravity="start|top"
+                android:hint="Tell us about yourself..."
+                android:inputType="textMultiLine"
+                android:textSize="24sp"
+                app:layout_constraintStart_toEndOf="@+id/infoBioRegistrationTextView"
+                app:layout_constraintTop_toBottomOf="@+id/phoneRegistrationEditText" />
+
+            <EditText
+                android:id="@+id/phoneRegistrationEditText"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="29dp"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:hint="Enter telephone..."
+                android:inputType="phone"
+                android:textSize="24sp"
+                app:layout_constraintStart_toEndOf="@+id/infoTelephoneRegistrationTextView"
+                app:layout_constraintTop_toBottomOf="@+id/emailRegistrationEditText" />
+
+            <EditText
+                android:id="@+id/emailRegistrationEditText"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="85dp"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="Enter email..."
+                android:inputType="textEmailAddress"
+                android:textSize="24sp"
+                app:layout_constraintStart_toEndOf="@+id/infoEmailRegistrationTextView"
+                app:layout_constraintTop_toBottomOf="@+id/passwordRegistrationEditText" />
+
+            <EditText
+                android:id="@+id/usernameRegistrationEditText"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="34dp"
+                android:layout_marginTop="7dp"
+                android:ems="10"
+                android:hint="Enter username..."
+                android:inputType="textPersonName"
+                android:textSize="24sp"
+                app:layout_constraintStart_toEndOf="@+id/infoUsernameRegistrationTextView"
+                app:layout_constraintTop_toBottomOf="@+id/fullNameRegistrationEditText" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

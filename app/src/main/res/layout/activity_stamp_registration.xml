@@ -11,6 +11,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -27,7 +28,7 @@
                 android:layout_width="67dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="13dp"
                 app:layout_constraintStart_toEndOf="@+id/LoadPicButton"
                 app:layout_constraintTop_toBottomOf="@+id/stampNameEditText"
                 app:srcCompat="@android:drawable/btn_star_big_on"
@@ -35,15 +36,14 @@
 
             <Button
                 android:id="@+id/addPostButton"
-                android:layout_width="wrap_content"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="56dp"
+                android:layout_marginStart="55dp"
+                android:layout_marginTop="44dp"
                 android:onClick="addStamp"
                 android:padding="20dp"
                 android:text="Add stamp to your collection"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.522"
+                android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/stampDescriptionEditText" />
 
@@ -66,22 +66,19 @@
                 android:id="@+id/infoDescriptionTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="36dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="35dp"
                 android:text=" Description:"
                 android:textSize="24sp"
-                app:layout_constraintBottom_toTopOf="@+id/addPostButton"
-                app:layout_constraintEnd_toStartOf="@+id/stampDescriptionEditText"
-                app:layout_constraintHorizontal_bias="0.1"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/infoCountryTextView"
-                app:layout_constraintVertical_bias="0.051" />
+                app:layout_constraintTop_toBottomOf="@+id/infoCountryTextView" />
 
             <Spinner
                 android:id="@+id/stampCountrySpinner"
                 android:layout_width="220dp"
                 android:layout_height="32dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="28dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/stampYearEditText" />
 
@@ -89,12 +86,11 @@
                 android:id="@+id/infoCountryTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="36dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="35dp"
                 android:text="Stamp country:"
                 android:textSize="24sp"
-                app:layout_constraintEnd_toStartOf="@+id/stampCountrySpinner"
-                app:layout_constraintHorizontal_bias="0.1"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/infoYearTextView" />
 
@@ -103,11 +99,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="36dp"
+                android:layout_marginTop="35dp"
                 android:text="Stamp year:"
                 android:textSize="24sp"
-                app:layout_constraintEnd_toStartOf="@+id/stampYearEditText"
-                app:layout_constraintHorizontal_bias="0.1"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/infoPicTextView" />
 
@@ -115,13 +110,13 @@
                 android:id="@+id/stampYearEditText"
                 android:layout_width="215dp"
                 android:layout_height="0dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginEnd="4dp"
                 android:ems="10"
                 android:hint="Enter year..."
                 android:inputType="number"
-                android:textSize="24sp"
                 android:maxLength="4"
+                android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/LoadPicButton" />
 
@@ -129,7 +124,7 @@
                 android:id="@+id/LoadPicButton"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="23dp"
                 android:layout_marginEnd="100dp"
                 android:onClick="selectImage"
                 android:text="Load pic"
@@ -140,12 +135,11 @@
                 android:id="@+id/infoPicTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="36dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="35dp"
                 android:text="Stamp picture:"
                 android:textSize="24sp"
-                app:layout_constraintEnd_toStartOf="@+id/LoadPicButton"
-                app:layout_constraintHorizontal_bias="0.102"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/infoNameTextView" />
 
@@ -153,12 +147,11 @@
                 android:id="@+id/infoNameTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="80dp"
                 android:text="Stamp name:"
                 android:textSize="24sp"
-                app:layout_constraintEnd_toStartOf="@+id/stampNameEditText"
-                app:layout_constraintHorizontal_bias="0.032"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/infoTitleTextView" />
 
@@ -166,13 +159,13 @@
                 android:id="@+id/stampNameEditText"
                 android:layout_width="220dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="72dp"
+                android:layout_marginTop="65dp"
                 android:layout_marginEnd="4dp"
                 android:ems="10"
                 android:hint="Enter name..."
                 android:inputType="textPersonName"
-                android:textSize="24sp"
                 android:maxLength="15"
+                android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/infoTitleTextView" />
 
@@ -180,12 +173,11 @@
                 android:id="@+id/infoTitleTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="64dp"
                 android:layout_marginTop="52dp"
                 android:text="Add your new stamp !"
                 android:textSize="30sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>

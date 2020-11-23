@@ -21,9 +21,9 @@
 
             <Spinner
                 android:id="@+id/collectionSpinner"
-                android:layout_width="330dp"
+                android:layout_width="0dp"
                 android:layout_height="30dp"
-                android:layout_marginTop="36dp"
+                android:layout_marginTop="15dp"
                 android:background="#FFEB3B"
                 android:backgroundTint="#2A92E4"
                 android:visibility="visible"
@@ -33,7 +33,7 @@
 
             <Button
                 android:id="@+id/addNewStampButton"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="48dp"
                 android:onClick="openStampRegistrationActivity"
@@ -45,7 +45,7 @@
             <Button
                 android:id="@+id/createNewCollectionButton"
                 android:layout_width="230dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginTop="48dp"
                 android:onClick="openCollectionCreationActivity"
                 android:text="Create new collection "
@@ -56,7 +56,7 @@
                 android:id="@+id/stampsListView"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginTop="52dp"
+                android:layout_marginTop="10dp"
                 android:isScrollContainer="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
