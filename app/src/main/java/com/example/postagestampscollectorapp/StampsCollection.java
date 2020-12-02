@@ -3,30 +3,57 @@ package com.example.postagestampscollectorapp;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.ArrayList;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity(tableName = "Collections")
 public class StampsCollection implements Parcelable {
 
-    static int generatorNo = 10000;
+    //static int generatorNo = 10000;
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
     int collectionId;
+    @ForeignKey(entity = User.class, parentColumns = "id", childColumns = "userId")
+    @ColumnInfo(name = "userId")
+    int userId;
+    @ColumnInfo(name = "name")
     String collectionName;
-    ArrayList<PostageStamp> stampsList;
+    @Ignore
+    List<PostageStamp> stampsList;
+    @ColumnInfo(name = "isPrivate")
     boolean isPrivate;
+    @ColumnInfo(name = "description")
     String collectionDescription;
+
 
     protected StampsCollection(Parcel in) {
         this.collectionId = in.readInt();
+        this.userId = in.readInt();
         this.collectionName = in.readString();
-        this.stampsList = new ArrayList<PostageStamp>();
+        this.stampsList = new ArrayList<>();
         in.readList(this.stampsList, PostageStamp.class.getClassLoader());
         this.isPrivate = in.readByte() != 0;
         this.collectionDescription = in.readString();
     }
 
-    StampsCollection(String collectionName, ArrayList<PostageStamp> stampsList, boolean isPrivate, String collectionDescription) {
-        this.collectionId = generatorNo++;
+    StampsCollection(String collectionName, int userId, List<PostageStamp> stampsList, boolean isPrivate, String collectionDescription) {
+        this.userId = userId;
         this.collectionName = collectionName;
         this.stampsList = stampsList;
+        this.isPrivate = isPrivate;
+        this.collectionDescription = collectionDescription;
+    }
+
+    public StampsCollection(int userId, String collectionName, boolean isPrivate, String collectionDescription) {
+        this.userId = userId;
+        this.collectionName = collectionName;
+        this.stampsList = null;
         this.isPrivate = isPrivate;
         this.collectionDescription = collectionDescription;
     }
@@ -47,8 +74,9 @@ public class StampsCollection implements Parcelable {
     public String toString() {
         return "StampsCollection{" +
                 "collectionId=" + collectionId +
+                ", userId=" + userId +
                 ", collectionName='" + collectionName + '\'' +
-                ", stampCollection=" + stampsList +
+                ", stampsList=" + stampsList +
                 ", isPrivate=" + isPrivate +
                 ", collectionDescription='" + collectionDescription + '\'' +
                 '}';
@@ -62,6 +90,7 @@ public class StampsCollection implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(collectionId);
+        dest.writeInt(userId);
         dest.writeString(collectionName);
         dest.writeList(stampsList);
         dest.writeByte((byte) (isPrivate ? 1 : 0));

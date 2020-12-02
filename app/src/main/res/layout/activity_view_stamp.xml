@@ -137,10 +137,11 @@
 
             <Button
                 android:id="@+id/currentStampModifyButton"
-                android:layout_width="wrap_content"
+                android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="50dp"
+                android:onClick="modifyCurrentStamp"
                 android:text="MODIFY"
                 android:textSize="30sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -152,9 +153,23 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="50dp"
+                android:onClick="deleteCurrentStamp"
                 android:text="DELETE"
                 android:textSize="30sp"
                 app:layout_constraintStart_toEndOf="@+id/currentStampModifyButton"
+                app:layout_constraintTop_toBottomOf="@+id/infoCurrentStampDescriptionTextView" />
+
+            <Button
+                android:id="@+id/currentStampSaveButton"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="50dp"
+                android:onClick="saveCurrentStamp"
+                android:text="SAVE"
+                android:textSize="30sp"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/infoCurrentStampDescriptionTextView" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

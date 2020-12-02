@@ -55,7 +55,8 @@ public class StampAdapter extends BaseAdapter {
         stampYearTextView.setText(String.valueOf(stamp.year));
         stampCountryTextView.setText(stamp.country.toString());
 
-        stampImageView.setImageBitmap(stamp.pic);
+        Bitmap stampPic = BitmapUtilities.getBitmap(stamp.picBytes);
+        stampImageView.setImageBitmap(stampPic);
 
         return generatedView;
     }

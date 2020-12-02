@@ -42,6 +42,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="112dp"
                     android:layout_marginTop="40dp"
+                    android:onClick="loginAction"
                     android:text="LOGIN"
                     android:textSize="30sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -71,6 +72,7 @@
                     android:inputType="textPassword"
                     android:maxLength="15"
                     android:selectAllOnFocus="true"
+                    android:text="Conditii101"
                     android:textSize="24sp"
                     app:layout_constraintStart_toEndOf="@+id/infoPasswordTextView"
                     app:layout_constraintTop_toBottomOf="@+id/usernameEditText" />
@@ -85,6 +87,7 @@
                     android:inputType="textEmailAddress"
                     android:maxLength="15"
                     android:selectAllOnFocus="true"
+                    android:text="SergeantDart"
                     android:textSize="24sp"
                     app:layout_constraintStart_toEndOf="@+id/infoUsernameTextView"
                     app:layout_constraintTop_toBottomOf="@+id/infoLoginTextView" />

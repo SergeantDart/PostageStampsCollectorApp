@@ -1,18 +1,22 @@
 package com.example.postagestampscollectorapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.postagestampscollectorapp.Database.Database;
+
 public class LoginActivity extends AppCompatActivity {
+
+     Database database;
+     UserDao userDao;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,41 +24,76 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        EditText username=(EditText)findViewById(R.id.usernameEditText);
-        username.setText("username", TextView.BufferType.EDITABLE);
-        EditText password=(EditText)findViewById(R.id.passwordEditText) ;
-        password.setText("password",TextView.BufferType.EDITABLE);
-        Button blogin = (Button)findViewById(R.id.loginButton);
-
-        blogin.setOnClickListener(new OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-                String user = username.getText().toString();
-                String passWord=password.getText().toString();
-
-                if(user.equals("username") && passWord.equals("password")){
-                    Toast.makeText(getApplicationContext(), "Redirecting..",
-                            Toast.LENGTH_SHORT).show();
-
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
-                }
-                else if(user.equals("")&&passWord.equals("")){
-                    Toast.makeText(getApplicationContext(), "Please fill the required fields!",
-                            Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    Toast.makeText(getApplicationContext(), "Invalid username or password. Please try again!",
-                          Toast.LENGTH_LONG).show();
-               }
-
-            }
-        });
+       // Button loginButton = (Button) findViewById(R.id.loginButton);
+        database = Room.databaseBuilder(getApplicationContext(), Database.class, "myDatabase").fallbackToDestructiveMigration().build();
+        userDao = database.userDao();
 
     }
 
-    public void openUserSignupActivity(View v){
+    protected class GetUserIdAsyncTask extends  AsyncTask<String, Void, Integer>{
+        UserDao dao;
+
+        GetUserIdAsyncTask(UserDao dao) {
+            this.dao = dao;
+        }
+
+        @Override
+        protected Integer doInBackground(String... strings) {
+            return dao.getUserId(strings[0],strings[1]);
+        }
+
+        @Override
+        protected void onPostExecute(Integer integer) {
+            super.onPostExecute(integer);
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent.putExtra("userId",integer);
+            //database.close();
+            startActivity(intent);
+        }
+    }
+
+    protected class CheckIfAccountExistsAsyncTask extends AsyncTask<String, Void, Integer> {
+
+        UserDao dao;
+        String username;
+        String password;
+        CheckIfAccountExistsAsyncTask(UserDao dao) {
+            this.dao = dao;
+        }
+
+        @Override
+        protected Integer doInBackground(String... strings) {
+            username=strings[0];
+            password=strings[1];
+            return dao.searchIfAccountExists(strings[0], strings[1]);
+        }
+
+        @Override
+        protected void onPostExecute(Integer count) {
+            super.onPostExecute(count);
+            if (count == 1) {
+                new GetUserIdAsyncTask(dao).execute(username,password);
+            } else if (count == 0) {
+                Toast.makeText(getApplicationContext(), "Invalid username or passowrd! Try again...", Toast.LENGTH_SHORT).show();
+                EditText username = (EditText) findViewById(R.id.usernameEditText);
+                username.setText("");
+                EditText password = (EditText) findViewById(R.id.passwordEditText);
+                password.setText("");
+            }
+        }
+    }
+
+    public void loginAction(View v) {
+        EditText usernameEditText = (EditText) findViewById(R.id.usernameEditText);
+        EditText passwordEditText = (EditText) findViewById(R.id.passwordEditText);
+        String username = usernameEditText.getText().toString();
+        String password = passwordEditText.getText().toString();
+
+        new CheckIfAccountExistsAsyncTask(userDao).execute(username, password);
+
+    }
+
+    public void openUserSignupActivity(View v) {
         Intent intent = new Intent(getApplicationContext(), UserSignupActivity.class);
         startActivity(intent);
     }
