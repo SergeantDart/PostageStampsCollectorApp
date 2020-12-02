@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#613030"
     android:backgroundTint="#E91E63"
-    tools:context=".CollectionCreationActivity">
+    tools:context=".Activities.CollectionCreationActivity">
 
     <ScrollView
         android:layout_width="match_parent"

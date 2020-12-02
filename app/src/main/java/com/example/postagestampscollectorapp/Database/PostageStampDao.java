@@ -1,13 +1,12 @@
-package com.example.postagestampscollectorapp;
+package com.example.postagestampscollectorapp.Database;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
-import androidx.room.Update;
+
+import com.example.postagestampscollectorapp.Data.PostageStamp;
 
 import java.util.List;
-
-import static android.icu.text.MessagePattern.ArgType.SELECT;
 
 @Dao
 public interface PostageStampDao {

@@ -1,4 +1,4 @@
-package com.example.postagestampscollectorapp;
+package com.example.postagestampscollectorapp.Activities;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +16,13 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 
+import com.example.postagestampscollectorapp.Data.PostageStamp;
+import com.example.postagestampscollectorapp.Data.StampsCollection;
 import com.example.postagestampscollectorapp.Database.Database;
+import com.example.postagestampscollectorapp.Database.PostageStampDao;
+import com.example.postagestampscollectorapp.R;
+import com.example.postagestampscollectorapp.Others.StampAdapter;
+import com.example.postagestampscollectorapp.Database.StampsCollectionDao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getApplicationContext(), ViewStampActivity.class);
-                int postageStampId = chosenCollection.stampsList.get(position).stampId;
+                int postageStampId = chosenCollection.getStampsList().get(position).getStampId();
                 intent.putExtra("postageStampId", postageStampId);
                 startActivityForResult(intent, REQUEST_VIEW_STAMP_ACTIVITY);
             }
@@ -133,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(List<PostageStamp> postageStamps) {
             super.onPostExecute(postageStamps);
-            chosenCollection.stampsList = postageStamps;
+            chosenCollection.setStampsList(postageStamps);
             resetStampAdapter();
 
         }
@@ -156,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(StampsCollection stampsCollection) {
             super.onPostExecute(stampsCollection);
             chosenCollection = stampsCollection;
-            new GetWantedStampsAsyncTask(postageStampDao).execute(chosenCollection.collectionId);
+            new GetWantedStampsAsyncTask(postageStampDao).execute(chosenCollection.getCollectionId());
             //Toast.makeText(getApplicationContext(), chosenCollection.toString(), Toast.LENGTH_LONG).show();
         }
     }
@@ -179,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
             collectionsList = stampsCollectionList;
             resetCollectionsNamesAdapter();
             for(StampsCollection sc : stampsCollectionList){
-                Log.i("stampCollection", "collectionId: "+sc.collectionId +" ,collectionName: "+sc.collectionName + " ,userId: " + sc.userId + " ,description: " + sc.collectionDescription);
+                Log.i("stampCollection", "collectionId: "+sc.getCollectionId() +" ,collectionName: "+sc.getCollectionName() + " ,userId: " + sc.getUserId() + " ,description: " + sc.getCollectionDescription());
             }
         }
     }
@@ -189,8 +195,8 @@ public class MainActivity extends AppCompatActivity {
         collectionsIds = new ArrayList<>();
 
         for (StampsCollection stampsCollection : collectionsList) {
-            collectionsNames.add(stampsCollection.collectionName);
-            collectionsIds.add(stampsCollection.collectionId);
+            collectionsNames.add(stampsCollection.getCollectionName());
+            collectionsIds.add(stampsCollection.getCollectionId());
             //Toast.makeText(this, stampsCollection.collectionName, Toast.LENGTH_SHORT).show();
         }
 
@@ -201,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void resetStampAdapter() {
-            stampAdapter = new StampAdapter(getApplicationContext(), chosenCollection.stampsList);
+            stampAdapter = new StampAdapter(getApplicationContext(), chosenCollection.getStampsList());
             stampsListView.setAdapter(stampAdapter);
             stampAdapter.notifyDataSetChanged();
 
@@ -216,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void openStampRegistrationActivity(View v) {
         Intent intent = new Intent(getApplicationContext(), StampRegistrationActivity.class);
-        intent.putExtra("collectionId", chosenCollection.collectionId);
+        intent.putExtra("collectionId", chosenCollection.getCollectionId());
         startActivityForResult(intent, REQUEST_STAMP_REGISTRATION_ACTIVITY);
     }
 
@@ -227,12 +233,12 @@ public class MainActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK && requestCode == REQUEST_STAMP_REGISTRATION_ACTIVITY) {
             //PostageStamp ps = data.getParcelableExtra("stamp");
             //chosenCollection.stampsList.add(ps);
-            new GetWantedStampsAsyncTask(postageStampDao).execute(chosenCollection.collectionId);
+            new GetWantedStampsAsyncTask(postageStampDao).execute(chosenCollection.getCollectionId());
         } else if (resultCode == RESULT_OK && requestCode == REQUST_COLLECTION_CREATOR_ACTIVITY) {
             // StampsCollection collection = data.getParcelableExtra("collection");
             new GetAllUserStampCollectionsAsyncTask(stampsCollectionDao).execute(currentUser);
         }else if(resultCode == RESULT_OK && requestCode == REQUEST_VIEW_STAMP_ACTIVITY){
-            new GetWantedStampsAsyncTask(postageStampDao).execute(chosenCollection.collectionId);
+            new GetWantedStampsAsyncTask(postageStampDao).execute(chosenCollection.getCollectionId());
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.postagestampscollectorapp;
+package com.example.postagestampscollectorapp.Activities;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +19,11 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.postagestampscollectorapp.Others.BitmapUtilities;
+import com.example.postagestampscollectorapp.Data.PostageStamp;
 import com.example.postagestampscollectorapp.Database.Database;
+import com.example.postagestampscollectorapp.Database.PostageStampDao;
+import com.example.postagestampscollectorapp.R;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -108,7 +112,7 @@ public class StampRegistrationActivity extends AppCompatActivity {
         protected void onPostExecute(List<PostageStamp> postageStamps) {
             super.onPostExecute(postageStamps);
             for (PostageStamp ps : postageStamps) {
-                Log.i("stamp", "stampName: " + ps.name + ", stampId: " + ps.stampId + " ,collectionId: " + ps.collectionId + " ,country: " + ps.country);
+                Log.i("stamp", "stampName: " + ps.getName() + ", stampId: " + ps.getStampId() + " ,collectionId: " + ps.getCollectionId() + " ,country: " + ps.getCountry());
             }
         }
     }

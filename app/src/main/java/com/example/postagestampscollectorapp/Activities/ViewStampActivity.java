@@ -1,20 +1,22 @@
-package com.example.postagestampscollectorapp;
+package com.example.postagestampscollectorapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.postagestampscollectorapp.Others.BitmapUtilities;
+import com.example.postagestampscollectorapp.Data.PostageStamp;
 import com.example.postagestampscollectorapp.Database.Database;
+import com.example.postagestampscollectorapp.Database.PostageStampDao;
+import com.example.postagestampscollectorapp.R;
 
 public class ViewStampActivity extends AppCompatActivity {
 
@@ -69,11 +71,11 @@ public class ViewStampActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(PostageStamp postageStamp) {
             super.onPostExecute(postageStamp);
-            currentStampImageView.setImageBitmap(BitmapUtilities.getBitmap(postageStamp.picBytes));
-            currentStampNameEditText.setText(postageStamp.name);
-            currentStampYearEditText.setText(String.valueOf(postageStamp.year));
-            currentStampCountryEditText.setText(postageStamp.country);
-            currentStampDescriptionEditText.setText(postageStamp.description);
+            currentStampImageView.setImageBitmap(BitmapUtilities.getBitmap(postageStamp.getPicBytes()));
+            currentStampNameEditText.setText(postageStamp.getName());
+            currentStampYearEditText.setText(String.valueOf(postageStamp.getYear()));
+            currentStampCountryEditText.setText(postageStamp.getCountry());
+            currentStampDescriptionEditText.setText(postageStamp.getDescription());
         }
     }
 

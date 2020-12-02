@@ -1,4 +1,4 @@
-package com.example.postagestampscollectorapp;
+package com.example.postagestampscollectorapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
@@ -10,7 +10,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.postagestampscollectorapp.Data.User;
 import com.example.postagestampscollectorapp.Database.Database;
+import com.example.postagestampscollectorapp.R;
+import com.example.postagestampscollectorapp.Database.UserDao;
 
 import java.util.List;
 
@@ -41,7 +44,7 @@ public class UserSignupActivity extends AppCompatActivity {
         }
     }
 
-    protected  class SelectAllUsersAsyncTask extends AsyncTask<Void, Void, List<User>> {
+    protected class SelectAllUsersAsyncTask extends AsyncTask<Void, Void, List<User>> {
 
         UserDao dao;
 
@@ -59,7 +62,7 @@ public class UserSignupActivity extends AppCompatActivity {
             super.onPostExecute(databaseUserDataList);
             List<User> list = databaseUserDataList;
             for (User dud : list) {
-                Log.i("users", "userId: " + dud.userId + " ,username: " + dud.username + " ,passoword: " + dud.password + " ,fullName: " + dud.fullName);
+                Log.i("users", "userId: " + dud.getUserId() + " ,username: " + dud.getUsername() + " ,passoword: " + dud.getPassword() + " ,fullName: " + dud.getFullName());
             }
         }
     }

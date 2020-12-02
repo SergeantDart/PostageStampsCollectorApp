@@ -1,4 +1,4 @@
-package com.example.postagestampscollectorapp;
+package com.example.postagestampscollectorapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.postagestampscollectorapp.Database.Database;
+import com.example.postagestampscollectorapp.R;
+import com.example.postagestampscollectorapp.Database.UserDao;
 
 public class LoginActivity extends AppCompatActivity {
 

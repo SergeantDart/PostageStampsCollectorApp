@@ -1,10 +1,8 @@
 
-package com.example.postagestampscollectorapp;
+package com.example.postagestampscollectorapp.Others;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.net.Uri;
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +10,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.IOException;
+import com.example.postagestampscollectorapp.Data.PostageStamp;
+import com.example.postagestampscollectorapp.Others.BitmapUtilities;
+import com.example.postagestampscollectorapp.R;
+
 import java.util.List;
 
 public class StampAdapter extends BaseAdapter {
@@ -20,7 +21,7 @@ public class StampAdapter extends BaseAdapter {
     Context context;
     List<PostageStamp> stampsList;
 
-    StampAdapter(Context context, List<PostageStamp> stampsList) {
+    public StampAdapter(Context context, List<PostageStamp> stampsList) {
         this.context = context;
         this.stampsList = stampsList;
     }
@@ -51,11 +52,11 @@ public class StampAdapter extends BaseAdapter {
         TextView stampCountryTextView = generatedView.findViewById(R.id.stampCountryTextView);
         ImageView stampImageView = generatedView.findViewById(R.id.stampImageView);
 
-        stampNameTextView.setText(stamp.name.toString());
-        stampYearTextView.setText(String.valueOf(stamp.year));
-        stampCountryTextView.setText(stamp.country.toString());
+        stampNameTextView.setText(stamp.getName().toString());
+        stampYearTextView.setText(String.valueOf(stamp.getYear()));
+        stampCountryTextView.setText(stamp.getCountry().toString());
 
-        Bitmap stampPic = BitmapUtilities.getBitmap(stamp.picBytes);
+        Bitmap stampPic = BitmapUtilities.getBitmap(stamp.getPicBytes());
         stampImageView.setImageBitmap(stampPic);
 
         return generatedView;

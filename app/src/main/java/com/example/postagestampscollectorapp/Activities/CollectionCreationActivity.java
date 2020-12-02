@@ -1,4 +1,4 @@
-package com.example.postagestampscollectorapp;
+package com.example.postagestampscollectorapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
@@ -14,7 +14,10 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.example.postagestampscollectorapp.Data.StampsCollection;
 import com.example.postagestampscollectorapp.Database.Database;
+import com.example.postagestampscollectorapp.R;
+import com.example.postagestampscollectorapp.Database.StampsCollectionDao;
 
 public class CollectionCreationActivity extends AppCompatActivity {
 

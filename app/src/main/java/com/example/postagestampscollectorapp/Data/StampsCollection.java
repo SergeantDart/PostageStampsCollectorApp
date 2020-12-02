@@ -1,4 +1,4 @@
-package com.example.postagestampscollectorapp;
+package com.example.postagestampscollectorapp.Data;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -32,7 +32,7 @@ public class StampsCollection implements Parcelable {
     String collectionDescription;
 
 
-    protected StampsCollection(Parcel in) {
+    public StampsCollection(Parcel in) {
         this.collectionId = in.readInt();
         this.userId = in.readInt();
         this.collectionName = in.readString();
@@ -42,7 +42,7 @@ public class StampsCollection implements Parcelable {
         this.collectionDescription = in.readString();
     }
 
-    StampsCollection(String collectionName, int userId, List<PostageStamp> stampsList, boolean isPrivate, String collectionDescription) {
+    public StampsCollection(String collectionName, int userId, List<PostageStamp> stampsList, boolean isPrivate, String collectionDescription) {
         this.userId = userId;
         this.collectionName = collectionName;
         this.stampsList = stampsList;
@@ -95,5 +95,53 @@ public class StampsCollection implements Parcelable {
         dest.writeList(stampsList);
         dest.writeByte((byte) (isPrivate ? 1 : 0));
         dest.writeString(collectionDescription);
+    }
+
+    public int getCollectionId() {
+        return collectionId;
+    }
+
+    public void setCollectionId(int collectionId) {
+        this.collectionId = collectionId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public String getCollectionName() {
+        return collectionName;
+    }
+
+    public void setCollectionName(String collectionName) {
+        this.collectionName = collectionName;
+    }
+
+    public List<PostageStamp> getStampsList() {
+        return stampsList;
+    }
+
+    public void setStampsList(List<PostageStamp> stampsList) {
+        this.stampsList = stampsList;
+    }
+
+    public boolean isPrivate() {
+        return isPrivate;
+    }
+
+    public void setPrivate(boolean aPrivate) {
+        isPrivate = aPrivate;
+    }
+
+    public String getCollectionDescription() {
+        return collectionDescription;
+    }
+
+    public void setCollectionDescription(String collectionDescription) {
+        this.collectionDescription = collectionDescription;
     }
 }

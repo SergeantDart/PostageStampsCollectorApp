@@ -1,4 +1,4 @@
-package com.example.postagestampscollectorapp;
+package com.example.postagestampscollectorapp.Others;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

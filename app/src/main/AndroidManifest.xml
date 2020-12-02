@@ -12,9 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PostageStampsCollectorApp">
-        <activity android:name=".ViewStampActivity"></activity>
-        <activity android:name=".UserSignupActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".Activities.ViewStampActivity"></activity>
+        <activity android:name=".Activities.UserSignupActivity" />
+        <activity android:name=".Activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,10 +22,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CollectionCreationActivity"
+            android:name=".Activities.CollectionCreationActivity"
             android:theme="@style/Theme.AppCompat.CustomPopUpTheme" />
-        <activity android:name=".StampRegistrationActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".Activities.StampRegistrationActivity" />
+        <activity android:name=".Activities.MainActivity" />
     </application>
 
 </manifest>

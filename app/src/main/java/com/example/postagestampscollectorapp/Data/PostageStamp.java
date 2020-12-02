@@ -1,4 +1,4 @@
-package com.example.postagestampscollectorapp;
+package com.example.postagestampscollectorapp.Data;
 
 
 import android.graphics.Bitmap;
@@ -9,6 +9,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
+
+import com.example.postagestampscollectorapp.Others.BitmapUtilities;
 
 import java.io.ByteArrayOutputStream;
 

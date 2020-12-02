@@ -1,4 +1,4 @@
-package com.example.postagestampscollectorapp;
+package com.example.postagestampscollectorapp.Data;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
