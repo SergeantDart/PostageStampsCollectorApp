@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -23,9 +24,16 @@ import com.example.postagestampscollectorapp.Database.PostageStampDao;
 import com.example.postagestampscollectorapp.R;
 import com.example.postagestampscollectorapp.Others.StampAdapter;
 import com.example.postagestampscollectorapp.Database.StampsCollectionDao;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -53,10 +61,12 @@ public class MainActivity extends AppCompatActivity {
     StampsCollectionDao stampsCollectionDao;
     PostageStampDao postageStampDao;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         database = Room.databaseBuilder(getApplicationContext(), Database.class, "myDatabase").fallbackToDestructiveMigration().build();
         stampsCollectionDao = database.stampsCollectionDao();
@@ -184,9 +194,12 @@ public class MainActivity extends AppCompatActivity {
             super.onPostExecute(stampsCollectionList);
             collectionsList = stampsCollectionList;
             resetCollectionsNamesAdapter();
+            Map<String,Object> note=new HashMap<>();
             for(StampsCollection sc : stampsCollectionList){
                 Log.i("stampCollection", "collectionId: "+sc.getCollectionId() +" ,collectionName: "+sc.getCollectionName() + " ,userId: " + sc.getUserId() + " ,description: " + sc.getCollectionDescription());
+
             }
+
         }
     }
 

@@ -4,14 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#613030"
-    android:backgroundTint="#E91E63"
-    tools:context=".Activities.CollectionCreationActivity">
+    tools:context=".Activities.CollectionCreationActivity"
+    style="@style/PostageStampCollectorStyle">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FFC107"
+        style="@style/PostageStampCollectorStyle"
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,7 +30,7 @@
                 android:layout_marginStart="44dp"
                 android:layout_marginTop="12dp"
                 app:layout_constraintStart_toEndOf="@+id/isCollectionPublicTextView"
-                app:layout_constraintTop_toBottomOf="@+id/colectionNameEditText">
+                app:layout_constraintTop_toBottomOf="@+id/collectionNameEditText">
 
                 <RadioButton
                     android:id="@+id/publicRadioButton"
@@ -78,7 +77,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/isCollectionPublicTextView" />
 
             <EditText
-                android:id="@+id/colectionNameEditText"
+                android:id="@+id/collectionNameEditText"
                 android:layout_width="190dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
@@ -121,13 +120,13 @@
 
             <Button
                 android:id="@+id/createCollectionButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="43dp"
-                android:layout_marginTop="52dp"
+                style="@style/ButtonPostageCollectionStyle"
+                android:layout_width="247dp"
+                android:layout_height="57dp"
+                android:layout_marginStart="80dp"
+                android:layout_marginTop="36dp"
                 android:onClick="createNewCollection"
                 android:text="Create collection"
-                android:textSize="30sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/collectionDescriptionEditText" />
 

@@ -18,6 +18,7 @@ import com.example.postagestampscollectorapp.Data.StampsCollection;
 import com.example.postagestampscollectorapp.Database.Database;
 import com.example.postagestampscollectorapp.R;
 import com.example.postagestampscollectorapp.Database.StampsCollectionDao;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class CollectionCreationActivity extends AppCompatActivity {
 
@@ -32,6 +33,9 @@ public class CollectionCreationActivity extends AppCompatActivity {
 
     Database database;
     StampsCollectionDao stampsCollectionDao;
+
+
+    FirebaseFirestore db=FirebaseFirestore.getInstance();
 
     int userId;
 
@@ -49,6 +53,9 @@ public class CollectionCreationActivity extends AppCompatActivity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
         getWindow().setLayout((int) (width * 0.9), (int) (height * 0.9));
+
+
+
     }
 
     public class InsertStampCollectionAsyncTask extends AsyncTask<StampsCollection, Void, Void> {
@@ -79,7 +86,7 @@ public class CollectionCreationActivity extends AppCompatActivity {
 
     public void createNewCollection(View v) {
 
-        collectionNameEditText = (EditText) findViewById(R.id.colectionNameEditText);
+        collectionNameEditText = (EditText) findViewById(R.id.collectionNameEditText);
         collectionDescriptionEditText = (EditText) findViewById(R.id.collectionDescriptionEditText);
         collectionAccesabilitRadioGroup = (RadioGroup) findViewById(R.id.collectionAccesabilityRadioGroup);
 

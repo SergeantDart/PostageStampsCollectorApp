@@ -21,4 +21,11 @@ public interface UserDao {
     public int searchIfAccountExists(String username, String password);
 
     @Query("SELECT id FROM Users WHERE username=:username AND password=:password")
-    public int getUserId(String username, String password);}
+    public int getUserId(String username, String password);
+
+    @Query("SELECT id FROM Users WHERE username=:username")
+    public int getSearchedUserId(String username);
+
+
+}
+

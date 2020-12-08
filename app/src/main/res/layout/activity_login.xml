@@ -38,13 +38,16 @@
 
                 <Button
                     android:id="@+id/loginButton"
+                    style="@style/ButtonStyle"
                     android:layout_width="155dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="112dp"
                     android:layout_marginTop="40dp"
+                    android:background="#F1511B"
+                    android:backgroundTint="#FFFFFF"
                     android:onClick="loginAction"
                     android:text="LOGIN"
-                    android:textSize="30sp"
+                    android:textColor="#FFFFFF"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/passwordEditText" />
 
