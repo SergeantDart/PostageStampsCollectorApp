@@ -9,14 +9,17 @@ import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import com.google.api.Distribution;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Entity(tableName = "Collections")
 public class StampsCollection implements Parcelable {
 
     //static int generatorNo = 10000;
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     @ColumnInfo(name = "id")
     int collectionId;
     @ForeignKey(entity = User.class, parentColumns = "id", childColumns = "userId")
@@ -31,6 +34,36 @@ public class StampsCollection implements Parcelable {
     @ColumnInfo(name = "description")
     String collectionDescription;
 
+    @Ignore
+    public StampsCollection() {
+        Random rand = new Random ();
+        this.collectionId = ( rand.nextInt(999999) + rand.nextInt(10) - rand.nextInt(60 ))* (rand.nextInt(5) + 1);
+        this.userId = 0;
+        this.collectionName = "N/A";
+        this.stampsList = null;
+        this.isPrivate = false;
+        this.collectionDescription = "N/A";
+    }
+
+    public StampsCollection(int userId, String collectionName, boolean isPrivate, String collectionDescription) {
+        Random rand = new Random ();
+        this.collectionId = ( rand.nextInt(999999) + collectionName.length() - collectionDescription.length() ) * (rand.nextInt(5) + 1);
+        this.userId = userId;
+        this.collectionName = collectionName;
+        this.stampsList = null;
+        this.isPrivate = isPrivate;
+        this.collectionDescription = collectionDescription;
+    }
+
+    @Ignore
+    public StampsCollection(int collectionId, int userId, String collectionName, List<PostageStamp> stampsList, boolean isPrivate, String collectionDescription) {
+        this.collectionId = collectionId;
+        this.userId = userId;
+        this.collectionName = collectionName;
+        this.stampsList = stampsList;
+        this.isPrivate = isPrivate;
+        this.collectionDescription = collectionDescription;
+    }
 
     public StampsCollection(Parcel in) {
         this.collectionId = in.readInt();
@@ -40,22 +73,6 @@ public class StampsCollection implements Parcelable {
         in.readList(this.stampsList, PostageStamp.class.getClassLoader());
         this.isPrivate = in.readByte() != 0;
         this.collectionDescription = in.readString();
-    }
-
-    public StampsCollection(String collectionName, int userId, List<PostageStamp> stampsList, boolean isPrivate, String collectionDescription) {
-        this.userId = userId;
-        this.collectionName = collectionName;
-        this.stampsList = stampsList;
-        this.isPrivate = isPrivate;
-        this.collectionDescription = collectionDescription;
-    }
-
-    public StampsCollection(int userId, String collectionName, boolean isPrivate, String collectionDescription) {
-        this.userId = userId;
-        this.collectionName = collectionName;
-        this.stampsList = null;
-        this.isPrivate = isPrivate;
-        this.collectionDescription = collectionDescription;
     }
 
     public static final Creator<StampsCollection> CREATOR = new Creator<StampsCollection>() {

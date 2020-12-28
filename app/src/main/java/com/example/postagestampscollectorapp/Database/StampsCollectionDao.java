@@ -19,4 +19,7 @@ public interface StampsCollectionDao {
 
     @Query("SELECT * FROM Collections WHERE userId = :userId")
     public List<StampsCollection> getAllUserStampCollections(int userId);
+
+    @Query("DELETE FROM Collections")
+    public void deleteAllCollections();
 }

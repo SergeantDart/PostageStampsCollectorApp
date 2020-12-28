@@ -29,13 +29,15 @@ import com.example.postagestampscollectorapp.Database.StampsCollectionDao;
 import com.example.postagestampscollectorapp.Database.UserDao;
 import com.example.postagestampscollectorapp.Others.StampAdapter;
 import com.example.postagestampscollectorapp.R;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SearchPostageStamps extends AppCompatActivity {
+//WORK IN PROGRESS
+public class SearchOtherUsersActivity extends AppCompatActivity {
 
     SearchView searchView;
 
@@ -43,8 +45,13 @@ public class SearchPostageStamps extends AppCompatActivity {
     StampAdapter stampAdapter;
     ArrayAdapter<String> collectionsNamesAdapter;
 
+    //SQLite database
     StampsCollectionDao stampsCollectionDao;
     Database database;
+
+    //Firebase database
+    FirebaseDatabase fbDatabase;
+
     List<StampsCollection> collectionsList = new ArrayList<StampsCollection>();
     List<String> collectionsNames;
     List<Integer> collectionsIds;

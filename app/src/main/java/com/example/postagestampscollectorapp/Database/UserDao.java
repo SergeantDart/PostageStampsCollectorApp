@@ -26,6 +26,9 @@ public interface UserDao {
     @Query("SELECT id FROM Users WHERE username=:username")
     public int getSearchedUserId(String username);
 
+    @Query("DELETE FROM Users")
+    public void deleteAllUsers();
+
 
 }
 

@@ -15,41 +15,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/addNewStampButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="15dp"
+                android:clickable="true"
+                android:onClick="openStampRegistrationActivity"
+                app:backgroundTint="@color/blue__violet"
+                app:layout_constraintBottom_toBottomOf="@+id/stampsListView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@android:drawable/ic_menu_add" />
+
             <Spinner
                 android:id="@+id/collectionSpinner"
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="15dp"
+                android:layout_width="365dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
                 android:background="#FFEB3B"
-                android:backgroundTint="#2A92E4"
+                android:backgroundTint="@color/blue__violet"
                 android:visibility="visible"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/dropdownArrowImageView"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/createNewCollectionButton" />
-
-            <Button
-                android:id="@+id/addNewStampButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="48dp"
-                android:onClick="openStampRegistrationActivity"
-                android:text="Add new Stamp"
-                app:layout_constraintEnd_toStartOf="@+id/createNewCollectionButton"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/createNewCollectionButton"
-                android:layout_width="230dp"
-                android:layout_height="0dp"
-                android:layout_marginTop="48dp"
-                android:onClick="openCollectionCreationActivity"
-                android:text="Create new collection "
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ListView
@@ -60,12 +53,56 @@
                 android:isScrollContainer="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lineTextView" />
+
+            <ImageView
+                android:id="@+id/dropdownArrowImageView"
+                android:layout_width="60dp"
+                android:layout_height="53dp"
+                android:background="@drawable/dropdown_arrow"
+                android:backgroundTint="@color/blue__violet"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@drawable/dropdown_arrow" />
+
+            <TextView
+                android:id="@+id/collectionDescriptonTextView"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:background="@color/grey"
+                android:backgroundTint="#FFEB3B"
+                android:maxLines="25"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/collectionSpinner"
-                app:layout_constraintVertical_bias="0.009">
+                app:layout_constraintTop_toBottomOf="@+id/collectionDescriptionInfoTextView" />
 
-            </ListView>
+            <TextView
+                android:id="@+id/collectionDescriptionInfoTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="About the collection:"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dropdownArrowImageView" />
+
+            <TextView
+                android:id="@+id/lineTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/blue__violet"
+                android:shadowColor="#673AB7"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/collectionDescriptonTextView" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

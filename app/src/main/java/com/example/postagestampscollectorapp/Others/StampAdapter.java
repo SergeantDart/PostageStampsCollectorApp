@@ -16,6 +16,7 @@ import com.example.postagestampscollectorapp.R;
 
 import java.util.List;
 
+//listview postage stamp adapter
 public class StampAdapter extends BaseAdapter {
 
     Context context;
@@ -41,10 +42,13 @@ public class StampAdapter extends BaseAdapter {
         return position;
     }
 
+    //the postage stamp's image will be decompressed at listview item level from the byte array
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         PostageStamp stamp = (PostageStamp)getItem(position);
+        //layout inflater is a helper tool designed to help us create a listview item
         LayoutInflater layoutInflater = LayoutInflater.from(this.context);
+        //generate the listview item based on a preset layout and populate it with data from the associated list
         View generatedView = layoutInflater.inflate(R.layout.stamp_listview_item,parent,false);
 
         TextView stampNameTextView = generatedView.findViewById(R.id.stampNameTextView);

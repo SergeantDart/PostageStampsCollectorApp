@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "647456572134",
+    "firebase_url": "https://postagestampscollectorap-10800-default-rtdb.firebaseio.com",
+    "project_id": "postagestampscollectorap-10800",
+    "storage_bucket": "postagestampscollectorap-10800.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:647456572134:android:6dbdad86c2bb4add3f7127",
+        "android_client_info": {
+          "package_name": "com.example.postagestampscollectorapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "647456572134-k38v6h5vhbk5urn5i50kqd1f85ujk7jb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAz51Qus3fnerb5iGO04kuemp8J3RB_Gxo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "647456572134-k38v6h5vhbk5urn5i50kqd1f85ujk7jb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

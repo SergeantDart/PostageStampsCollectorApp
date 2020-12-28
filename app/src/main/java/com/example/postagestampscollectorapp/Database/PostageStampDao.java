@@ -15,17 +15,20 @@ public interface PostageStampDao {
     void addPostageStamp(PostageStamp postageStampData);
 
     @Query("SELECT * FROM Stamps")
-    List<PostageStamp>  getAllPostageStamps();
+    public List<PostageStamp>  getAllPostageStamps();
 
     @Query("SELECT * FROM Stamps WHERE collectionId = :id")
-    List<PostageStamp> getCertainCollectionStamps(int id);
+    public List<PostageStamp> getCertainCollectionStamps(int id);
 
     @Query("SELECT * FROM Stamps WHERE id = :id")
-    PostageStamp getPostageStampById(int id);
+    public PostageStamp getPostageStampById(int id);
 
     @Query("UPDATE Stamps SET name=:name, year=:year, country=:country, description=:description WHERE id = :id ")
-    void updateStampById(int id, String name, int year, String country, String description);
+    public void updateStampById(int id, String name, int year, String country, String description);
 
     @Query("DELETE FROM Stamps WHERE id=:id")
-    void deleteStampById(int id);
+    public void deleteStampById(int id);
+
+    @Query("DELETE FROM Stamps")
+    public void deleteAllStamps();
 }

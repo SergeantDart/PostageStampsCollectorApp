@@ -8,17 +8,19 @@ import android.os.Parcelable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import com.example.postagestampscollectorapp.Others.BitmapUtilities;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Random;
 
 
 @Entity(tableName = "Stamps")
 public
 class PostageStamp implements Parcelable {
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     @ColumnInfo(name = "id")
     int stampId;
     @ForeignKey(entity = StampsCollection.class, parentColumns = "id", childColumns = "stampId")
@@ -35,7 +37,31 @@ class PostageStamp implements Parcelable {
     @ColumnInfo(name = "description")
     String description;
 
+    @Ignore
+    public PostageStamp() {
+        Random rand = new Random ();
+        this.stampId = ( rand.nextInt(999999) + name.length() - year ) * (rand.nextInt(5) + 1);
+        this.collectionId = 0;
+        this.name = "N/A";
+        this.picBytes = null;
+        this.year = 0;
+        this.country = "N/A";
+        this.description = "N/A";
+    }
     public PostageStamp(int collectionId, String name, byte[] picBytes, int year, String country, String description) {
+        Random rand = new Random ();
+        this.stampId = ( rand.nextInt(999999) + name.length() - year ) * (rand.nextInt(5) + 1);
+        this.collectionId = collectionId;
+        this.name = name;
+        this.picBytes = picBytes;
+        this.year = year;
+        this.country = country;
+        this.description = description;
+    }
+
+    @Ignore
+    public PostageStamp(int stampId, int collectionId, String name, byte[] picBytes, int year, String country, String description) {
+        this.stampId = stampId;
         this.collectionId = collectionId;
         this.name = name;
         this.picBytes = picBytes;

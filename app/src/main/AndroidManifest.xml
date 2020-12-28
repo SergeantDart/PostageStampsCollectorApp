@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -14,17 +15,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PostageStampsCollectorApp">
         <activity android:name=".Activities.ViewStampActivity"></activity>
-        <activity android:name=".Activities.SearchPostageStamps">
+        <activity android:name=".Activities.SearchOtherUsersActivity">
+
+        </activity>
+        <activity android:name=".Activities.UserSignupActivity" >
+        </activity>
+        <activity android:name=".Activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".Activities.UserSignupActivity" >
-        </activity>
-        <activity android:name=".Activities.LoginActivity">
-
         </activity>
         <activity
             android:name=".Activities.CollectionCreationActivity"

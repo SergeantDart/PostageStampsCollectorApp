@@ -18,6 +18,8 @@ import com.example.postagestampscollectorapp.Data.StampsCollection;
 import com.example.postagestampscollectorapp.Database.Database;
 import com.example.postagestampscollectorapp.R;
 import com.example.postagestampscollectorapp.Database.StampsCollectionDao;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class CollectionCreationActivity extends AppCompatActivity {
@@ -29,14 +31,15 @@ public class CollectionCreationActivity extends AppCompatActivity {
     EditText collectionNameEditText;
     EditText collectionDescriptionEditText;
     RadioGroup collectionAccesabilitRadioGroup;
-    RadioButton choiceRadioButton;
 
+    //SQLite database
     Database database;
     StampsCollectionDao stampsCollectionDao;
 
+    //Firebase database
+    FirebaseDatabase fbDatabase;
 
-    FirebaseFirestore db=FirebaseFirestore.getInstance();
-
+    //current user's id
     int userId;
 
     @Override
@@ -44,46 +47,24 @@ public class CollectionCreationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collection_creation);
 
+        fbDatabase = FirebaseDatabase.getInstance();
         database = Room.databaseBuilder(getApplicationContext(), Database.class, "myDatabase").fallbackToDestructiveMigration().build();
         stampsCollectionDao = database.stampsCollectionDao();
 
         userId = getIntent().getIntExtra("userId", 0);
+
+        //making the activity's size fit inside the main activity
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getRealMetrics(dm);
         int width = dm.widthPixels;
         int height = dm.heightPixels;
         getWindow().setLayout((int) (width * 0.9), (int) (height * 0.9));
 
-
-
     }
 
-    public class InsertStampCollectionAsyncTask extends AsyncTask<StampsCollection, Void, Void> {
-        StampsCollectionDao dao;
 
-        InsertStampCollectionAsyncTask(StampsCollectionDao dao) {
-            this.dao = dao;
-        }
 
-        @Override
-        protected Void doInBackground(StampsCollection... stampsCollections) {
-            dao.addStampCollection(stampsCollections[0]);
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            Toast.makeText(getApplicationContext(), "Stamp collection was added to the DB!", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent();
-            // intent.putExtra("collection", sc);
-            setResult(RESULT_OK, intent);
-            Toast.makeText(getApplicationContext(), "Nice! You created a new collection!", Toast.LENGTH_SHORT).show();
-            finish();
-
-        }
-    }
-
+    //the create new collection button onclick function
     public void createNewCollection(View v) {
 
         collectionNameEditText = (EditText) findViewById(R.id.collectionNameEditText);
@@ -106,11 +87,8 @@ public class CollectionCreationActivity extends AppCompatActivity {
         //TRB SA LUCREZ AICI
         if (!collectionName.equals("") && !collectionDescription.equals("") && collectionAccesabilitRadioGroup.getCheckedRadioButtonId() != -1) {
 
-            StampsCollection sc = new StampsCollection(collectionName, userId,null, isPrivate, collectionDescription);
+            StampsCollection sc = new StampsCollection(userId, collectionName, isPrivate, collectionDescription);
             new InsertStampCollectionAsyncTask(stampsCollectionDao).execute(sc);
-
-
-
         } else if (collectionName.equals("")) {
             Toast.makeText(getApplicationContext(), "Add a name to your collection!", Toast.LENGTH_SHORT).show();
         } else if (collectionDescription.equals("")) {
@@ -120,5 +98,34 @@ public class CollectionCreationActivity extends AppCompatActivity {
         } else
             Toast.makeText(getApplicationContext(), "Incomplete data!", Toast.LENGTH_SHORT).show();
 
+    }
+
+    //async task for adding and inserting a new collection to the DB
+    public class InsertStampCollectionAsyncTask extends AsyncTask<StampsCollection, Void, Void> {
+        StampsCollectionDao dao;
+
+        InsertStampCollectionAsyncTask(StampsCollectionDao dao) {
+            this.dao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(StampsCollection... stampsCollections) {
+            dao.addStampCollection(stampsCollections[0]);
+            DatabaseReference collectionsReference = fbDatabase.getReference("users/user - " + Integer.valueOf(stampsCollections[0].getUserId()) + "/collections");
+            collectionsReference.child("collection - " + stampsCollections[0].getCollectionId()).setValue(stampsCollections[0]);
+            collectionsReference.child("collection - " + stampsCollections[0].getCollectionId()).child("stamps").setValue("null");
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            Toast.makeText(getApplicationContext(), "Stamp collection was added to the DB!", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent();
+            setResult(RESULT_OK, intent);
+            Toast.makeText(getApplicationContext(), "Nice! You created a new collection!", Toast.LENGTH_SHORT).show();
+            finish();
+
+        }
     }
 }

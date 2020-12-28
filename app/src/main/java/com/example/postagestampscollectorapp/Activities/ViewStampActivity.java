@@ -17,6 +17,9 @@ import com.example.postagestampscollectorapp.Data.PostageStamp;
 import com.example.postagestampscollectorapp.Database.Database;
 import com.example.postagestampscollectorapp.Database.PostageStampDao;
 import com.example.postagestampscollectorapp.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 public class ViewStampActivity extends AppCompatActivity {
 
@@ -28,19 +31,35 @@ public class ViewStampActivity extends AppCompatActivity {
     Button currentStampModifyButton;
     Button currentStampDeleteButton;
     Button currentStampSaveButton;
+
+    //SQLite database
     Database database;
     PostageStampDao postageStampDao;
+
+    //selected postage stamp's id
     int postageStampId;
+    //stamp's collection's id
+    int collectionId;
+    //current user's id
+    int userId;
+
+    //Firebase database
+    FirebaseDatabase fbDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_stamp);
 
+        fbDatabase = FirebaseDatabase.getInstance();
+
         database = Room.databaseBuilder(getApplicationContext(), Database.class, "myDatabase").fallbackToDestructiveMigration().build();
         postageStampDao = database.postageStampDao();
-        //PostageStamp ps = getIntent().getParcelableExtra("myStamp");
+
+        //retrieve the intent sent parameters
         postageStampId = getIntent().getIntExtra("postageStampId", 0);
+        collectionId = getIntent().getIntExtra("collectionId",0);
+        userId = getIntent().getIntExtra("userId", 0);
 
         currentStampImageView = (ImageView) findViewById(R.id.currentStampImageView);
         currentStampNameEditText = (EditText) findViewById(R.id.currentStampNameEditText);
@@ -52,10 +71,30 @@ public class ViewStampActivity extends AppCompatActivity {
         currentStampSaveButton = (Button)findViewById(R.id.currentStampSaveButton);
 
         new GetPostageStampByIdAsyncTask(postageStampDao).execute(postageStampId);
-
-
     }
 
+    //the modify button onclick function which changes its visibility when pressed and enables editing information
+    public void modifyCurrentStamp(View v) {
+        currentStampNameEditText.setEnabled(true);
+        currentStampYearEditText.setEnabled(true);
+        currentStampCountryEditText.setEnabled(true);
+        currentStampDescriptionEditText.setEnabled(true);
+        currentStampModifyButton.setVisibility(View.INVISIBLE);
+        currentStampSaveButton.setVisibility(View.VISIBLE);
+    }
+
+    //the save button onclick function which becomes visible after pressing the modify button
+    public void saveCurrentStamp(View v){
+        new UpdatePostageStampByIdAsyncTask(postageStampDao).execute(postageStampId, currentStampNameEditText.getText().toString(), Integer.valueOf(currentStampYearEditText.getText().toString()),
+                currentStampCountryEditText.getText().toString(), currentStampDescriptionEditText.getText().toString());
+    }
+
+    //the delete button onclick function
+    public void deleteCurrentStamp(View v) {
+        new DeletePostageStampByIdAsyncTask(postageStampDao).execute(postageStampId);
+    }
+
+    //async task for getting the selected postage stamp's information from the DB
     public class GetPostageStampByIdAsyncTask extends AsyncTask<Integer, Void, PostageStamp> {
         PostageStampDao dao;
 
@@ -79,6 +118,7 @@ public class ViewStampActivity extends AppCompatActivity {
         }
     }
 
+    //async task for updating the selected postage stamp's information to the DB
     public class UpdatePostageStampByIdAsyncTask extends AsyncTask<Object, Void, Void> {
         PostageStampDao dao;
 
@@ -88,7 +128,14 @@ public class ViewStampActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Object... objects) {
+            //SQLite DB implementation
             dao.updateStampById((int) objects[0], (String) objects[1], (int) objects[2], (String) objects[3], (String) objects[4]);
+            //Firebase DB implementation
+            DatabaseReference chosenStampReference = fbDatabase.getReference("users/user - " + Integer.valueOf(userId) + "/collections/collection - " + Integer.valueOf(collectionId) + "/stamps/stamp - " + Integer.valueOf(postageStampId));
+            chosenStampReference.child("name").setValue((String)objects[1]);
+            chosenStampReference.child("year").setValue((int)objects[2]);
+            chosenStampReference.child("country").setValue((String)objects[3]);
+            chosenStampReference.child("description").setValue((String)objects[4]);
             return null;
         }
 
@@ -100,13 +147,14 @@ public class ViewStampActivity extends AppCompatActivity {
             currentStampCountryEditText.setEnabled(false);
             currentStampDescriptionEditText.setEnabled(false);
             Toast.makeText(getApplicationContext(), "Postage stamp succesfully updated in the DB !", Toast.LENGTH_SHORT).show();
-            currentStampModifyButton.setText("MODIFY");
+
             Intent intent = new Intent();
             setResult(RESULT_OK,intent);
             finish();
         }
     }
 
+    //async task for deleting the selected postage stamp from the DB
     public class DeletePostageStampByIdAsyncTask extends AsyncTask<Integer, Void, Void>{
         PostageStampDao dao;
         DeletePostageStampByIdAsyncTask(PostageStampDao dao){
@@ -115,7 +163,11 @@ public class ViewStampActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Integer... integers) {
+            //SQLite DB implementation
             dao.deleteStampById(integers[0]);
+            //Firebase DB implementation
+            DatabaseReference chosenStampReference = fbDatabase.getReference("users/user - " + Integer.valueOf(userId) + "/collections/collection - " + Integer.valueOf(collectionId) + "/stamps/stamp - " + Integer.valueOf(postageStampId));
+            chosenStampReference.removeValue();
             return null;
         }
 
@@ -127,25 +179,5 @@ public class ViewStampActivity extends AppCompatActivity {
             setResult(RESULT_OK,intent);
             finish();
         }
-    }
-
-    public void modifyCurrentStamp(View v) {
-        currentStampNameEditText.setEnabled(true);
-        currentStampYearEditText.setEnabled(true);
-        currentStampCountryEditText.setEnabled(true);
-        currentStampDescriptionEditText.setEnabled(true);
-        currentStampModifyButton.setVisibility(View.INVISIBLE);
-        currentStampSaveButton.setVisibility(View.VISIBLE);
-
-
-    }
-
-    public void saveCurrentStamp(View v){
-        new UpdatePostageStampByIdAsyncTask(postageStampDao).execute(postageStampId, currentStampNameEditText.getText().toString(), Integer.valueOf(currentStampYearEditText.getText().toString()),
-                currentStampCountryEditText.getText().toString(), currentStampDescriptionEditText.getText().toString());
-    }
-
-    public void deleteCurrentStamp(View v) {
-        new DeletePostageStampByIdAsyncTask(postageStampDao).execute(postageStampId);
     }
 }
