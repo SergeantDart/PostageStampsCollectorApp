@@ -38,7 +38,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     //request codes
-    final int REQUST_COLLECTION_CREATOR_ACTIVITY = 0;
+    final int REQUEST_COLLECTION_CREATOR_ACTIVITY = 0;
     final int REQUEST_STAMP_REGISTRATION_ACTIVITY = 1;
     final int REQUEST_VIEW_STAMP_ACTIVITY = 2;
 
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayAdapter<String> collectionsNamesAdapter;
 
     //current user's id
-    int currentUser;
+    int currentUserId;
 
     //SQLite database
     Database database;
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         stampsCollectionDao = database.stampsCollectionDao();
         postageStampDao = database.postageStampDao();
 
-        currentUser = getIntent().getIntExtra("userId", 0);
+        currentUserId = getIntent().getIntExtra("userId", 0);
 
         //creating and populating the spinner with all the user's collection names
         collectionsSpinner = (Spinner) findViewById(R.id.collectionSpinner);
@@ -86,9 +86,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 int collectionId=collectionsIds.get(position);
-                new GetChosenStampCollectionAsyncTask(stampsCollectionDao).execute(collectionId, currentUser);
-
-
+                new GetChosenStampCollectionAsyncTask(stampsCollectionDao).execute(collectionId, currentUserId);
             }
 
             @Override
@@ -108,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
 
         stampsListView = (ListView) findViewById(R.id.stampsListView);
 
-        new GetAllUserStampCollectionsAsyncTask(stampsCollectionDao).execute(currentUser);
+        new GetAllUserStampCollectionsAsyncTask(stampsCollectionDao).execute(currentUserId);
 
         resetCollectionsNamesAdapter();
 
@@ -120,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
                 int postageStampId = chosenCollection.getStampsList().get(position).getStampId();
                 intent.putExtra("postageStampId", postageStampId);
                 intent.putExtra("collectionId",chosenCollection.getCollectionId());
-                intent.putExtra("userId",currentUser);
+                intent.putExtra("userId",currentUserId);
                 startActivityForResult(intent, REQUEST_VIEW_STAMP_ACTIVITY);
             }
         });
@@ -181,15 +179,15 @@ public class MainActivity extends AppCompatActivity {
     //directing to collection creation activity
     public void openCollectionCreationActivity() {
         Intent intent = new Intent(getApplicationContext(), CollectionCreationActivity.class);
-        intent.putExtra("userId", currentUser);
-        startActivityForResult(intent, REQUST_COLLECTION_CREATOR_ACTIVITY);
+        intent.putExtra("userId", currentUserId);
+        startActivityForResult(intent, REQUEST_COLLECTION_CREATOR_ACTIVITY);
     }
 
     //directing to postage stamp creation ( it is created inside the current selected collection ) activity
     public void openStampRegistrationActivity(View v) {
         if(chosenCollection!=null){
             Intent intent = new Intent(getApplicationContext(), StampRegistrationActivity.class);
-            intent.putExtra("userId", currentUser);
+            intent.putExtra("userId", currentUserId);
             intent.putExtra("collectionId", chosenCollection.getCollectionId());
             startActivityForResult(intent, REQUEST_STAMP_REGISTRATION_ACTIVITY);
         }else{
@@ -219,8 +217,8 @@ public class MainActivity extends AppCompatActivity {
             new GetWantedStampsAsyncTask(postageStampDao).execute(chosenCollection.getCollectionId());
         }
         //repopulating the collections' names spinner after succesfully creating and adding a new collection
-        else if (resultCode == RESULT_OK && requestCode == REQUST_COLLECTION_CREATOR_ACTIVITY) {
-            new GetAllUserStampCollectionsAsyncTask(stampsCollectionDao).execute(currentUser);
+        else if (resultCode == RESULT_OK && requestCode == REQUEST_COLLECTION_CREATOR_ACTIVITY) {
+            new GetAllUserStampCollectionsAsyncTask(stampsCollectionDao).execute(currentUserId);
         }
         //repopulating the listview after succesfully modifying/deleting postage stamp of the currently selected collection
         else if(resultCode == RESULT_OK && requestCode == REQUEST_VIEW_STAMP_ACTIVITY){

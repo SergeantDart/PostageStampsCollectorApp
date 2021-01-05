@@ -38,6 +38,14 @@
         <item name="android:background">@color/white</item>
         <item name="android:backgroundTint">@color/orange</item>
     </style>
+
+    <style name="cons">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:padding">30dp</item>
+    </style>
+
     <string name="wlcmsg">welcome to Tutlane</string>
 
 </resources>
