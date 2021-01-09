@@ -50,7 +50,11 @@ import io.grpc.Context;
      //to enable the query we need to add to it a ValueEventListener, it's mandatory with any kind of Firebase DB query, otherwise the query won't start
      ValueEventListener valueEventListener;
 
-    @Override
+     //boolean used to know then do deactivate the FB query ( if needed)
+     boolean hasLogged;
+
+
+     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -74,13 +78,17 @@ import io.grpc.Context;
      @Override
      protected void onPause() {
          super.onPause();
-         loginQuery.removeEventListener(valueEventListener);
+         if(hasLogged == true) {
+             loginQuery.removeEventListener(valueEventListener);
+         }
      }
 
      @Override
      protected void onDestroy() {
          super.onDestroy();
-         loginQuery.removeEventListener(valueEventListener);
+         if(hasLogged == true){
+             loginQuery.removeEventListener(valueEventListener);
+         }
      }
 
      //async task for querying a match for the credentials, deleting the existing SQLite DB data and populating it with the current user's data from Firebase
@@ -93,7 +101,7 @@ import io.grpc.Context;
         String password;
 
 
-        CheckIfAccountExistsAsyncTask(UserDao userDao, StampsCollectionDao stampsCollectionDao, PostageStampDao postageStampDao) {
+         CheckIfAccountExistsAsyncTask(UserDao userDao, StampsCollectionDao stampsCollectionDao, PostageStampDao postageStampDao) {
             this.userDao = userDao;
             this.postageStampDao = postageStampDao;
             this.stampsCollectionDao = stampsCollectionDao;
@@ -105,7 +113,6 @@ import io.grpc.Context;
 
             username=strings[0];
             password=strings[1];
-
 
             loginQuery = fbDatabase.getReference("users").orderByChild("username").equalTo(username);
 
@@ -196,6 +203,7 @@ import io.grpc.Context;
                 }
             };
 
+            hasLogged=true;
             //we add the ValueEventListener to the query to start it off
             loginQuery.addValueEventListener(valueEventListener);
 
@@ -233,6 +241,7 @@ import io.grpc.Context;
         UserDao userDao;
 
         DeleteAllUsersAsyncTask(UserDao userDao){
+
             this.userDao = userDao;
         }
 
@@ -300,6 +309,7 @@ import io.grpc.Context;
          UserDao userDao;
 
          InsertNewUserAsyncTask(UserDao userDao){
+
              this.userDao = userDao;
          }
 

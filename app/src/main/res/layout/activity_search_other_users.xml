@@ -2,24 +2,255 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/searchOtherUsersConstraintLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#FFEB3B">
 
-    <SearchView
-        android:id="@+id/searchView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:queryHint="Search other users..."
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ListView
-        android:id="@+id/usernamesListView"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="match_parent"
+        android:background="#FFEB3B"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/userFullNameTextView"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="10dp"
+                android:background="#FFEB3B"
+                android:isScrollContainer="true"
+                android:textSize="24sp"
+                android:visibility="invisible"
+                app:layout_constraintStart_toEndOf="@+id/searchedUserFullNameTextViewLabel"
+                app:layout_constraintTop_toBottomOf="@+id/userUsernameTextView" />
+
+            <TextView
+                android:id="@+id/userUsernameTextView"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:background="#FFEB3B"
+                android:isScrollContainer="true"
+                android:textSize="24sp"
+                android:visibility="invisible"
+                app:layout_constraintStart_toEndOf="@+id/searchedUserUsernameTextViewLabel"
+                app:layout_constraintTop_toTopOf="@+id/usernamesListView" />
+
+            <TextView
+                android:id="@+id/userEmailTextView"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="80dp"
+                android:layout_marginTop="10dp"
+                android:background="#FFEB3B"
+                android:textSize="24sp"
+                android:visibility="invisible"
+                app:layout_constraintStart_toEndOf="@+id/searchedUserEmailTextViewLabel"
+                app:layout_constraintTop_toBottomOf="@+id/userFullNameTextView" />
+
+            <TextView
+                android:id="@+id/searchedUserBioTextViewLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/ShortBioLabel"
+                android:textColor="#9C27B0"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/userTelephoneTextView" />
+
+            <TextView
+                android:id="@+id/searchedUserTelephonelTextViewLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/TelephoneLabel"
+                android:textColor="#9C27B0"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/userEmailTextView" />
+
+            <TextView
+                android:id="@+id/searchedUserEmailTextViewLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/EmailLabel"
+                android:textColor="#9C27B0"
+                android:textColorHighlight="#FFFFFF"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/userFullNameTextView" />
+
+            <TextView
+                android:id="@+id/searchedUserFullNameTextViewLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#9C27B0"
+                android:text="@string/FullNameLabel"
+                android:textColor="#9C27B0"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/userUsernameTextView" />
+
+            <TextView
+                android:id="@+id/searchedUserUsernameTextViewLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="#FFEB3B"
+                android:text="@string/UsernameLabel"
+                android:textColor="#9C27B0"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/usernamesListView" />
+
+            <ListView
+                android:id="@+id/usernamesListView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#673AB7"
+                android:isScrollContainer="true"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/searchView" />
+
+            <SearchView
+                android:id="@+id/searchView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="#9C27B0"
+                android:queryHint="Search other users..."
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/userTelephoneTextView"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="27dp"
+                android:layout_marginTop="8dp"
+                android:background="#FFEB3B"
+                android:isScrollContainer="true"
+                android:textSize="24sp"
+                android:visibility="invisible"
+                app:layout_constraintStart_toEndOf="@+id/searchedUserTelephonelTextViewLabel"
+                app:layout_constraintTop_toBottomOf="@+id/userEmailTextView" />
+
+            <TextView
+                android:id="@+id/userBioTextView"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="42dp"
+                android:layout_marginTop="10dp"
+                android:background="#FFEB3B"
+                android:isScrollContainer="true"
+                android:textSize="24sp"
+                android:visibility="invisible"
+                app:layout_constraintStart_toEndOf="@+id/searchedUserBioTextViewLabel"
+                app:layout_constraintTop_toBottomOf="@+id/userTelephoneTextView" />
+
+            <TextView
+                android:id="@+id/searchedUserCollectionsLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/CollectionsLabel"
+                android:textColor="#9C27B0"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/userBioTextView" />
+
+            <Spinner
+                android:id="@+id/userCollectionsSpinner"
+                android:layout_width="240dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="6dp"
+                android:dropDownSelector="@drawable/dropdown_arrow"
+                android:visibility="invisible"
+                app:layout_constraintStart_toEndOf="@+id/searchedUserCollectionsLabel"
+                app:layout_constraintTop_toBottomOf="@+id/userBioTextView" />
+
+            <TextView
+                android:id="@+id/searchedUserCollectionDescriptionTextBoxLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/AboutTheCollection"
+                android:textColor="#9C27B0"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/searchedUserCollectionsLabel" />
+
+            <TextView
+                android:id="@+id/userCollectionDescriptionTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:isScrollContainer="true"
+                android:textSize="24sp"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/searchedUserCollectionDescriptionTextBoxLabel" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="10dp"
+                android:background="#9C27B0"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/userCollectionDescriptionTextView" />
+
+            <ListView
+                android:id="@+id/searchedUserPostageStampsListView"
+                android:layout_width="0dp"
+                android:layout_height="500dp"
+                android:isScrollContainer="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView"
+                app:layout_constraintVertical_bias="0.0" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

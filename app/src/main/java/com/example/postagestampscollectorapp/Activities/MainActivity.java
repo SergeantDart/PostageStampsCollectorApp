@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
                 logout();
                 return true;
             case R.id.profileInfoOption:
-                Log.i("Profile activity: ", "opened");
+                openUserProfileActivity(currentUserId);
                 return true;
             default:
                 return true;
@@ -205,6 +205,12 @@ public class MainActivity extends AppCompatActivity {
     public void logout(){
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         finish();
+        startActivity(intent);
+    }
+
+    public void openUserProfileActivity(int userId){
+        Intent intent = new Intent(getApplicationContext(), UserProfileActivity.class);
+        intent.putExtra("userId", currentUserId);
         startActivity(intent);
     }
 

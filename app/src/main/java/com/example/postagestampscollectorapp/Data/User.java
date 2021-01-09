@@ -10,7 +10,7 @@ import java.util.Random;
 @Entity(tableName = "Users")
 public
 class User {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     int userId;
     @ColumnInfo(name = "fullname")

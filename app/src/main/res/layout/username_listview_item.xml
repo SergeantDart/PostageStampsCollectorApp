@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/listviewUsernameTextView"
-        android:layout_width="300px"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

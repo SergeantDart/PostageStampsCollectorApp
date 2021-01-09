@@ -26,14 +26,12 @@
                 android:id="@+id/stampNameTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Stamp name"
                 android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/stampYearTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Stamp year"
                 android:textSize="24sp" />
 
             <TextView
@@ -41,7 +39,6 @@
                 style="@style/Widget.AppCompat.TextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Stamp country"
                 android:textSize="24sp" />
         </LinearLayout>
 

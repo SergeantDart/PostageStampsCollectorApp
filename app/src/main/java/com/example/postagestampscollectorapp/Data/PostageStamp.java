@@ -37,6 +37,10 @@ class PostageStamp implements Parcelable {
     @ColumnInfo(name = "description")
     String description;
 
+    //used to store picture location in the Firestore
+    @Ignore
+    String stampPicUri;
+
     @Ignore
     public PostageStamp() {
         Random rand = new Random ();
@@ -65,6 +69,17 @@ class PostageStamp implements Parcelable {
         this.collectionId = collectionId;
         this.name = name;
         this.picBytes = picBytes;
+        this.year = year;
+        this.country = country;
+        this.description = description;
+    }
+
+    @Ignore
+    public PostageStamp(int stampId, int collectionId, String name, String stampPicUri, int year, String country, String description) {
+        this.stampId = stampId;
+        this.collectionId = collectionId;
+        this.name = name;
+        this.stampPicUri = stampPicUri;
         this.year = year;
         this.country = country;
         this.description = description;
@@ -171,5 +186,13 @@ class PostageStamp implements Parcelable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getStampPicUri() {
+        return stampPicUri;
+    }
+
+    public void setStampPicUri(String stampPicUri) {
+        this.stampPicUri = stampPicUri;
     }
 }

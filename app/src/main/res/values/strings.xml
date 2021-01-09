@@ -10,4 +10,71 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="search_title">search_title</string>
+
+
+    <string name="EnterFullName">Enter full name...</string>
+    <string name="EnterUsername">Enter username...</string>
+    <string name="EnterPassword">Enter password...</string>
+    <string name="EnterEmail">Enter email...</string>
+    <string name="EnterTelephone">Enter telephone...</string>
+    <string name="TellUsAboutYourself">Tell us about yourself...</string>
+    <string name="CreateNewAccount">CREATE NEW ACCOUNT</string>
+    <string name="CreateANewStampCollectorUser">Create a new stamp collector user</string>
+    <string name="FullNameLabel">Full name:</string>
+    <string name="UsernameLabel">Username:</string>
+    <string name="PasswordLabel">Password:</string>
+    <string name="EmailLabel">Email:</string>
+    <string name="TelephoneLabel">Telephone:</string>
+    <string name="ShortBioLabel">Short bio:</string>
+
+    <string name="CreateYourVeryOwnCollection">Create your very own collection !</string>
+    <string name="CollectionNameLabel">Collection name:</string>
+    <string name="AccesabilityLabel">Accesability:</string>
+    <string name="Public">Public</string>
+    <string name="Private">Private</string>
+    <string name="DescriptionLabel">Description:</string>
+    <string name="CreateCollection">Create collection</string>
+    <string name="DescribeCollection">Describe collection...</string>
+    <string name="EnterCollectionName">Enter name...</string>
+
+    <string name="LoginUsername">Username</string>
+    <string name="LoginPassword">Password</string>
+    <string name="Login">LOGIN</string>
+    <string name="Signup">SIGN UP</string>
+    <string name="LoginIntoYourAccount">Login into your account !</string>
+
+    <string name="AboutTheCollection">About the collection:</string>
+
+    <string name="CollectionsLabel">Collections:</string>
+
+    <string name="AddYourNewStamp">Add your new stamp !</string>
+    <string name="StampNameLabel">Stamp name:</string>
+    <string name="StampPictureLabel">Stamp picture:</string>
+    <string name="StampYearLabel">Stamp year:</string>
+    <string name="StampCountryLabel">Stamp country:</string>
+    <string name="StampDescriptionLabel"> Description:</string>
+    <string name="EnterStampName">Enter name...</string>
+    <string name="LoadStampPic">Load pic</string>
+    <string name="EnterStampYear">Enter year...</string>
+    <string name="EnterStampDescription">Enter description...</string>
+    <string name="AddStampToYourCollection">Add stamp to your collection</string>
+
+    <string name="ViewStampNameLabel">Name:</string>
+    <string name="ViewStampYearLabel">Year:</string>
+    <string name="ViewStampCountryLabel">Country:</string>
+    <string name="ViewStampDescriptionLabel">Description:</string>
+    <string name="SaveStamp">SAVE</string>
+    <string name="ModifyStamp">MODIFY</string>
+    <string name="DeleteStamp">DELETE</string>
+
+    <string name="ProfileFullNameLabel">Full name:</string>
+    <string name="ProfileUsernameLabel">Username:</string>
+    <string name="ProfilePasswordLabel">Password:</string>
+    <string name="ProfileEmailLabel">Email:</string>
+    <string name="ProfileTelephoneLabel">Telephone:</string>
+    <string name="ProfileShortBioLabel">Short bio:</string>
+    <string name="ProfileSaveButton">SAVE</string>
+    <string name="ProfileModifyButton">MODIFY</string>
+    <string name="WannaChangeYourProfile">Wanna change your profile ?</string>
+
 </resources>

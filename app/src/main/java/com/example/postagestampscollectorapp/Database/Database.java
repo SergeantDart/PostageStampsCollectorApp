@@ -6,7 +6,7 @@ import com.example.postagestampscollectorapp.Data.PostageStamp;
 import com.example.postagestampscollectorapp.Data.StampsCollection;
 import com.example.postagestampscollectorapp.Data.User;
 
-@androidx.room.Database(entities = {User.class, PostageStamp.class, StampsCollection.class}, version = 2, exportSchema = false)
+@androidx.room.Database(entities = {User.class, PostageStamp.class, StampsCollection.class}, version = 3, exportSchema = false)
 public abstract class Database extends RoomDatabase {
 
     public abstract UserDao userDao();
