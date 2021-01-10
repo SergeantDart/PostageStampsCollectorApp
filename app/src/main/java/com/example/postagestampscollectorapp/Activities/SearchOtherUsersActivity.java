@@ -5,6 +5,9 @@ import android.app.AsyncNotedAppOp;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -114,18 +117,27 @@ public class SearchOtherUsersActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         //removing the value event listener and stop the query loop ( could bug out in other Firebase DB queries)
-        usernamesQuery.removeEventListener(usernamesValueEventListener);
-        searchedUserQuery.removeEventListener(searchedUserValueEventListener);
-        searchedUserQuery.removeEventListener(searchedUserSelectedCollectionValueEventListener);
+        if(usernamesValueEventListener != null){
+            usernamesQuery.removeEventListener(usernamesValueEventListener);
+        }else if(searchedUserValueEventListener != null){
+            searchedUserQuery.removeEventListener(searchedUserValueEventListener);
+        }else if(searchedUserSelectedCollectionValueEventListener != null) {
+            searchedUserQuery.removeEventListener(searchedUserSelectedCollectionValueEventListener);
+        }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         //removing the value event listener and stop the query loop ( could bug out in other Firebase DB queries)
-        usernamesQuery.removeEventListener(usernamesValueEventListener);
-        searchedUserQuery.removeEventListener(searchedUserValueEventListener);
-        searchedUserQuery.removeEventListener(searchedUserSelectedCollectionValueEventListener);
+        if(usernamesValueEventListener != null){
+            usernamesQuery.removeEventListener(usernamesValueEventListener);
+        }else if(searchedUserValueEventListener != null){
+            searchedUserQuery.removeEventListener(searchedUserValueEventListener);
+        }else if(searchedUserSelectedCollectionValueEventListener != null) {
+            searchedUserQuery.removeEventListener(searchedUserSelectedCollectionValueEventListener);
+        }
+
 
     }
 
@@ -172,7 +184,6 @@ public class SearchOtherUsersActivity extends AppCompatActivity {
 
         usernameAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, usernamesList);
 
-
         usernamesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -211,10 +222,6 @@ public class SearchOtherUsersActivity extends AppCompatActivity {
 
                 currentlySearchedUserUsername = text1.getText().toString();
 
-                postageStampsList.clear();
-                searchedUserStampAdapter.notifyDataSetChanged();
-
-
                 new FetchSearchedUserInformationAsyncTask().execute(currentlySearchedUserUsername);
             }
         });
@@ -247,6 +254,44 @@ public class SearchOtherUsersActivity extends AppCompatActivity {
         new FetchUsernamesAsyncTask().execute();
     }
 
+    //assigns the wanted menu to the activity
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.search_other_users_activity_menu, menu);
+        return true;
+    }
+
+    //assigns each menu item an onclick function
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.homepageOption:
+                cancelSearchUsers();
+                return true;
+            default:
+                return true;
+        }
+    }
+
+    //reseter function for the searchedUserStampAdapter
+    void resetSearchedUserStampAdapter(){
+        searchedUserStampAdapter = new SearchedUserStampAdapter(getApplicationContext(), postageStampsList, fbDatabase, fbStorage);
+        searchedUserPostageStampsListView.setAdapter(searchedUserStampAdapter);
+        searchedUserStampAdapter.notifyDataSetChanged();
+    }
+
+    //reseter function for the collectionsNamesAdapter
+    void resetCollectionsNamesAdapter(){
+        collectionsNamesAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_text, collectionsNamesList);
+        collectionsNamesAdapter.setDropDownViewResource(R.layout.spinner_dropdown_items);
+        searchedUserCollectionsSpinner.setAdapter(collectionsNamesAdapter);
+    }
+
+    //on click function for closing the activity
+    void cancelSearchUsers(){
+        finish();
+    }
 
     //async task for fetching all the usernames from the Firebase DB in order to populate the search view's results posibilities
     protected class FetchUsernamesAsyncTask extends AsyncTask<Void, Void, Void> {
@@ -317,17 +362,14 @@ public class SearchOtherUsersActivity extends AppCompatActivity {
                             for (DataSnapshot collectionSnapshot : collectionsSnapshot.getChildren()) {
                                 //automatically creates a stamps collection object based on the matched attributes from the Firebase DB
                                 StampsCollection stampsCollection = collectionSnapshot.getValue(StampsCollection.class);
-                                collectionsNamesList.add(stampsCollection.getCollectionName());
-                                collectionsIdsList.add(stampsCollection.getCollectionId());
+                                if(stampsCollection.isPrivate() == false) {
+                                    collectionsNamesList.add(stampsCollection.getCollectionName());
+                                    collectionsIdsList.add(stampsCollection.getCollectionId());
+                                }
                             }
                             //resetting the postage stamps listview and the collections' names spinner
-                            collectionsNamesAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_text, collectionsNamesList);
-                            collectionsNamesAdapter.setDropDownViewResource(R.layout.spinner_dropdown_items);
-                            searchedUserCollectionsSpinner.setAdapter(collectionsNamesAdapter);
-
-                            searchedUserStampAdapter = new SearchedUserStampAdapter(getApplicationContext(), postageStampsList, fbDatabase, fbStorage);
-                            searchedUserPostageStampsListView.setAdapter(searchedUserStampAdapter);
-
+                            resetCollectionsNamesAdapter();
+                            resetSearchedUserStampAdapter();
 
 
                             searchedCollectionDescriptionTextView.setText("");
@@ -352,7 +394,7 @@ public class SearchOtherUsersActivity extends AppCompatActivity {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     postageStampsList.clear();
-                    searchedUserStampAdapter.notifyDataSetChanged();
+                    resetSearchedUserStampAdapter();
                     new FetchSearchedUserCollectionsInfoAsyncTask().execute(currentlySearchedUserId, collectionsIdsList.get(position));
                 }
 
@@ -394,8 +436,7 @@ public class SearchOtherUsersActivity extends AppCompatActivity {
 
                                 Log.i("Image locations: ", stampPicUri);
                             }
-                            searchedUserStampAdapter = new SearchedUserStampAdapter(getApplicationContext(), postageStampsList, fbDatabase, fbStorage);
-                            searchedUserPostageStampsListView.setAdapter(searchedUserStampAdapter);
+                            resetSearchedUserStampAdapter();
                         }
                     }
                 }

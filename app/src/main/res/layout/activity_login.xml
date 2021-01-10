@@ -38,12 +38,12 @@
 
                 <Button
                     android:id="@+id/loginButton"
-                    style="@style/Widget.AppCompat.Button"
+                    style="@style/loginButtonsStyle"
                     android:layout_width="165dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="112dp"
                     android:layout_marginTop="40dp"
-                    android:background="#F1511B"
+                    android:background="@color/blue__violet"
                     android:backgroundTint="#FFFFFF"
                     android:onClick="loginAction"
                     android:text="@string/Login"
@@ -54,6 +54,7 @@
 
                 <Button
                     android:id="@+id/signupButton"
+                    style="@style/loginButtonsStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="112dp"
@@ -135,6 +136,26 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/lastLoginDateTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/loggedInDateLabelTextView" />
+
+                <TextView
+                    android:id="@+id/loggedInDateLabelTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="60dp"
+                    android:text="@string/LastLoggedInTimeStamp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/signupButton" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 

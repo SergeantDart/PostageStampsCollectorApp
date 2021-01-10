@@ -74,12 +74,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="35dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/StampDescriptionLabel"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/infoCurrentStampCountryTextView" />
+                app:layout_constraintTop_toBottomOf="@+id/currentStampCountrySpinner" />
 
             <EditText
                 android:id="@+id/currentStampNameEditText"
@@ -109,23 +109,10 @@
                 app:layout_constraintTop_toBottomOf="@+id/currentStampNameEditText" />
 
             <EditText
-                android:id="@+id/currentStampCountryEditText"
-                android:layout_width="225dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="51dp"
-                android:layout_marginTop="10dp"
-                android:inputType="none"
-                android:enabled="false"
-                android:ems="10"
-                android:textSize="24sp"
-                app:layout_constraintStart_toEndOf="@+id/infoCurrentStampCountryTextView"
-                app:layout_constraintTop_toBottomOf="@+id/currentStampYearEditText" />
-
-            <EditText
                 android:id="@+id/currentStampDescriptionEditText"
                 android:layout_width="225dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="10dp"
                 android:ems="10"
                 android:enabled="false"
@@ -133,7 +120,7 @@
                 android:inputType="none"
                 android:textSize="24sp"
                 app:layout_constraintStart_toEndOf="@+id/infoCurrentStampDescriptionTextView"
-                app:layout_constraintTop_toBottomOf="@+id/currentStampCountryEditText" />
+                app:layout_constraintTop_toBottomOf="@+id/currentStampCountrySpinner" />
 
             <Button
                 android:id="@+id/currentStampModifyButton"
@@ -171,6 +158,29 @@
                 android:visibility="invisible"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/currentStampDescriptionEditText" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/floatingActionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:clickable="true"
+                android:onClick="cancelViewStamp"
+                app:backgroundTint="#23FFFFFF"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:drawable/btn_dialog" />
+
+            <Spinner
+                android:id="@+id/currentStampCountrySpinner"
+                android:layout_width="220dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="5dp"
+                android:dropDownSelector="@drawable/dropdown_arrow"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/currentStampYearEditText" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

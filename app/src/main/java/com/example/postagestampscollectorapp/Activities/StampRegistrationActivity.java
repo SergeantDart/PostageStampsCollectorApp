@@ -110,6 +110,7 @@ public class StampRegistrationActivity extends AppCompatActivity {
 
         stampCountrySpinner = (Spinner) findViewById(R.id.stampCountrySpinner);
         stampCountrySpinner.setAdapter(countryAdapter);
+
     }
 
     //the select image button onclick function for allowing the user to select an image from the device memory
@@ -146,7 +147,17 @@ public class StampRegistrationActivity extends AppCompatActivity {
     //for speed purposes the compression quality is set to a low value ( 10% )
     public void addStamp(View v) {
 
-        if (ok == 1 && !stampNameEditText.getText().toString().equals("") && !stampYearEditText.getText().toString().matches("") && !stampCountrySpinner.getSelectedItem().toString().equals("") && !stampDescriptionEditText.getText().toString().equals("")) {
+        if (stampNameEditText.getText().toString().equals("")) {
+            Toast.makeText(getApplicationContext(), "Add a name to your stamp !", Toast.LENGTH_SHORT).show();
+        } else if (stampYearEditText.getText().toString().isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Enter a valid year !", Toast.LENGTH_SHORT).show();
+        } else if (stampCountrySpinner.getSelectedItem().toString().equals("")) {
+            Toast.makeText(getApplicationContext(), "Select a country !", Toast.LENGTH_SHORT).show();
+        } else if (stampDescriptionEditText.getText().toString().equals("") || stampDescriptionEditText.getText().toString().length() < 10) {
+            Toast.makeText(getApplicationContext(), "The stamp desription must be at least 10 characters long !", Toast.LENGTH_SHORT).show();
+        } else if (ok == 0) {
+            Toast.makeText(getApplicationContext(), "Add a picture of your stamp!", Toast.LENGTH_SHORT).show();
+        } else {
             name = stampNameEditText.getText().toString();
             year = Integer.parseInt(stampYearEditText.getText().toString());
             country = stampCountrySpinner.getSelectedItem().toString();
@@ -157,17 +168,14 @@ public class StampRegistrationActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Nice! Your stamp was added to the collection!", Toast.LENGTH_SHORT).show();
             PostageStamp ps = new PostageStamp(collectionId, name, picBytes, year, country, description);
             new InsertPostageStampAsyncTask(postageStampDao).execute(ps);
-        } else if (stampNameEditText.getText().toString().equals("")) {
-            Toast.makeText(getApplicationContext(), "Add a name to your stamp!", Toast.LENGTH_SHORT).show();
-        } else if (stampYearEditText.getText().toString().isEmpty()) {
-            Toast.makeText(getApplicationContext(), "Add a year to your stamp!", Toast.LENGTH_SHORT).show();
-        } else if (stampDescriptionEditText.getText().toString().equals("")) {
-            Toast.makeText(getApplicationContext(), "Add a description your stamp!", Toast.LENGTH_SHORT).show();
-        } else if (ok == 0) {
-            Toast.makeText(getApplicationContext(), "Add a picture of your stamp!", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(getApplicationContext(), "Incomplete data!", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    //on click function for closing the activity
+    public void cancelStampCreation(View v){
+        Intent intent = new Intent();
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
     //async task for adding and inserting a new postage stamp to the DB (the stamp belonging to the currently selected collection)

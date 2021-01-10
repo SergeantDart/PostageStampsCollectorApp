@@ -18,8 +18,7 @@ import java.util.Random;
 
 
 @Entity(tableName = "Stamps")
-public
-class PostageStamp implements Parcelable {
+public class PostageStamp implements Parcelable {
     @PrimaryKey
     @ColumnInfo(name = "id")
     int stampId;

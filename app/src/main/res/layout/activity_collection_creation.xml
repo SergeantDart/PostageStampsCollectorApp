@@ -52,6 +52,7 @@
 
             <TextView
                 android:id="@+id/isCollectionPublicTextView"
+                style="@style/collectionCreationLabelsStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
@@ -65,6 +66,7 @@
 
             <TextView
                 android:id="@+id/infoCollectionDescriptionTextView"
+                style="@style/collectionCreationLabelsStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
@@ -93,6 +95,7 @@
 
             <TextView
                 android:id="@+id/infoCollectionNameTextView"
+                style="@style/collectionCreationLabelsStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="13dp"
@@ -141,6 +144,19 @@
                 android:textSize="36sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/createCollectionCancelButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:clickable="true"
+                android:onClick="cancelCollectionCreation"
+                app:backgroundTint="#31FFFFFF"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:drawable/btn_dialog" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

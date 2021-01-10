@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#45FFFFFF"
+    android:onClick="cancelProfile"
     tools:context=".Activities.UserProfileActivity">
 
     <ScrollView
@@ -29,15 +30,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="52dp"
                 android:backgroundTint="#5E5C54"
+                android:onClick="modifyProfile"
                 android:text="@string/ProfileModifyButton"
                 android:textSize="36sp"
-                android:visibility="invisible"
+                android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine" />
+                app:layout_constraintTop_toBottomOf="@+id/profileShortBioEditText" />
 
             <TextView
                 android:id="@+id/profileFullNameLabelTextView"
+                style="@style/collectionCreationLabelsStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
@@ -65,6 +68,7 @@
 
             <TextView
                 android:id="@+id/profileUsernameLabelTextView"
+                style="@style/collectionCreationLabelsStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
@@ -74,10 +78,11 @@
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+                app:layout_constraintTop_toBottomOf="@+id/profileFullNameEditText" />
 
             <TextView
                 android:id="@+id/profilePasswordLabelTextView"
+                style="@style/collectionCreationLabelsStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
@@ -87,10 +92,11 @@
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+                app:layout_constraintTop_toBottomOf="@+id/profileUsernameEditText" />
 
             <TextView
                 android:id="@+id/profileEmailLabelTextView"
+                style="@style/collectionCreationLabelsStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
@@ -100,10 +106,11 @@
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+                app:layout_constraintTop_toBottomOf="@+id/profilePasswordEditText" />
 
             <TextView
                 android:id="@+id/profileTelephoneLabelTextView"
+                style="@style/collectionCreationLabelsStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
@@ -113,87 +120,106 @@
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
+                app:layout_constraintTop_toBottomOf="@+id/profileEmailEditText" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName"
+                android:id="@+id/profileFullNameEditText"
+                style="@style/profileInfoTextEditTextsStyle"
                 android:layout_width="240sp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="57dp"
+                android:editable="false"
                 android:ems="10"
                 android:inputType="textPersonName"
+                android:textColor="#000000"
                 app:layout_constraintStart_toEndOf="@+id/profileFullNameLabelTextView"
                 app:layout_constraintTop_toBottomOf="@+id/userPorfileInfoTextView" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName2"
+                android:id="@+id/profileUsernameEditText"
+                style="@style/profileInfoTextEditTextsStyle"
                 android:layout_width="240sp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="26dp"
                 android:layout_marginTop="7dp"
+                android:editable="false"
                 android:ems="10"
                 android:inputType="textPersonName"
+                android:shadowColor="#FFFFFF"
+                android:textColor="#000000"
                 app:layout_constraintStart_toEndOf="@+id/profileUsernameLabelTextView"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+                app:layout_constraintTop_toBottomOf="@+id/profileFullNameEditText" />
 
             <EditText
-                android:id="@+id/editTextTextPassword"
+                android:id="@+id/profilePasswordEditText"
+                style="@style/profileInfoTextEditTextsStyle"
                 android:layout_width="240sp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="27dp"
                 android:layout_marginTop="7dp"
                 android:ems="10"
                 android:inputType="textPassword"
+                android:textColor="#000000"
                 app:layout_constraintStart_toEndOf="@+id/profilePasswordLabelTextView"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+                app:layout_constraintTop_toBottomOf="@+id/profileUsernameEditText" />
 
             <EditText
-                android:id="@+id/editTextTextEmailAddress"
+                android:id="@+id/profileEmailEditText"
+                style="@style/profileInfoTextEditTextsStyle"
                 android:layout_width="240sp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="73dp"
                 android:layout_marginTop="5dp"
+                android:editable="false"
                 android:ems="10"
                 android:inputType="textEmailAddress"
+                android:textColor="#000000"
                 app:layout_constraintStart_toEndOf="@+id/profileEmailLabelTextView"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+                app:layout_constraintTop_toBottomOf="@+id/profilePasswordEditText" />
 
             <EditText
-                android:id="@+id/editTextNumber"
+                android:id="@+id/profileTelephoneEditText"
+                style="@style/profileInfoTextEditTextsStyle"
                 android:layout_width="240sp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="21dp"
                 android:layout_marginTop="4dp"
+                android:editable="false"
                 android:ems="10"
                 android:inputType="number"
+                android:textColor="#000000"
                 app:layout_constraintStart_toEndOf="@+id/profileTelephoneLabelTextView"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
+                app:layout_constraintTop_toBottomOf="@+id/profileEmailEditText" />
 
             <TextView
                 android:id="@+id/profileShortBioLabelTextView"
+                style="collectionCreationLabelsStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
-                android:text="Short bio:"
+                android:text="@string/ProfileShortBioLabel"
                 android:textColor="#000000"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextNumber" />
+                app:layout_constraintTop_toBottomOf="@+id/profileTelephoneEditText" />
 
             <EditText
-                android:id="@+id/editTextTextMultiLine"
+                android:id="@+id/profileShortBioEditText"
+                style="@style/profileInfoTextEditTextsStyle"
                 android:layout_width="240sp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="33dp"
                 android:layout_marginTop="5dp"
+                android:editable="false"
                 android:ems="10"
                 android:gravity="start|top"
                 android:inputType="textMultiLine"
+                android:textColor="#000000"
                 app:layout_constraintStart_toEndOf="@+id/profileShortBioLabelTextView"
-                app:layout_constraintTop_toBottomOf="@+id/editTextNumber" />
+                app:layout_constraintTop_toBottomOf="@+id/profileTelephoneEditText" />
 
             <Button
                 android:id="@+id/saveProfileButton"
@@ -201,11 +227,26 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="52dp"
                 android:backgroundTint="#5E5C54"
+                android:onClick="saveProfile"
                 android:text="@string/ProfileSaveButton"
                 android:textSize="36sp"
+                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine" />
+                app:layout_constraintTop_toBottomOf="@+id/profileShortBioEditText" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/floatingActionButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:clickable="true"
+                android:onClick="cancelProfile"
+                app:backgroundTint="#16FFFFFF"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:drawable/btn_dialog" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

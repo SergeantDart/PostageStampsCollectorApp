@@ -5,7 +5,8 @@
     android:id="@+id/searchOtherUsersConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFEB3B">
+    android:background="#9C27B0"
+    android:backgroundTint="#9C27B0">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -190,18 +191,18 @@
                 android:textStyle="bold"
                 android:visibility="invisible"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/userBioTextView" />
+                app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
             <Spinner
                 android:id="@+id/userCollectionsSpinner"
                 android:layout_width="240dp"
                 android:layout_height="45dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="5dp"
                 android:dropDownSelector="@drawable/dropdown_arrow"
                 android:visibility="invisible"
                 app:layout_constraintStart_toEndOf="@+id/searchedUserCollectionsLabel"
-                app:layout_constraintTop_toBottomOf="@+id/userBioTextView" />
+                app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
             <TextView
                 android:id="@+id/searchedUserCollectionDescriptionTextBoxLabel"
@@ -249,6 +250,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView"
                 app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#9C27B0"
+                android:textColor="#9C27B0"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/userBioTextView" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.postagestampscollectorapp.Data.PostageStamp;
@@ -30,6 +32,11 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import org.w3c.dom.Text;
+
+import java.util.Calendar;
+import java.util.Date;
 
 import io.grpc.Context;
 
@@ -53,6 +60,8 @@ import io.grpc.Context;
      //boolean used to know then do deactivate the FB query ( if needed)
      boolean hasLogged;
 
+     EditText usernameEditText;
+     EditText passwordEditText;
 
      @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +82,29 @@ import io.grpc.Context;
         //in the end, once all of them are finished we should have activeTasks = 0
         activeTasks = 0;
 
+        usernameEditText = (EditText) findViewById(R.id.usernameEditText);
+        passwordEditText = (EditText) findViewById(R.id.passwordEditText);
+
+        SharedPreferences settings = getSharedPreferences("LOGIN_INFO", 0);
+        String rememberedUsername = settings.getString("username", "");
+        String rememberedPassword = settings.getString("password", "");
+        String lastLoggedInDate = settings.getString("lastLoggedInDate", "");
+
+        TextView loggedInDateLabelTextView = (TextView)findViewById(R.id.loggedInDateLabelTextView);
+        TextView lastLoginDateTextView = (TextView) findViewById(R.id.lastLoginDateTextView);
+
+        if(!rememberedUsername.equals("")) {
+            if (lastLoggedInDate.equals("")) {
+                loggedInDateLabelTextView.setVisibility(View.INVISIBLE);
+            } else {
+                loggedInDateLabelTextView.setVisibility(View.VISIBLE);
+            }
+
+            lastLoginDateTextView.setText(lastLoggedInDate);
+        }
+
+        usernameEditText.setText(rememberedUsername);
+        passwordEditText.setText(rememberedPassword);
     }
 
      @Override
@@ -183,6 +215,17 @@ import io.grpc.Context;
                                 }catch(InterruptedException e){
                                     e.printStackTrace();
                                 }
+
+                                //we remember the last logged in user through shared preferences
+                                SharedPreferences settings = getSharedPreferences("LOGIN_INFO", 0);
+                                SharedPreferences.Editor editor = settings.edit();
+
+                                Date currentTime = Calendar.getInstance().getTime();
+                                editor.putString("lastLoggedInDate", currentTime.toString());
+                                editor.putString("username", username);
+                                editor.putString("password", password);
+                                editor.commit();;
+
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 intent.putExtra("userId", user.getUserId());
                                 startActivity(intent);
@@ -214,16 +257,12 @@ import io.grpc.Context;
      //function for response when credentials are wrong
      public void invalidResponse(){
          Toast.makeText(getApplicationContext(), "Invalid username or passowrd! Try again...", Toast.LENGTH_SHORT).show();
-         EditText username = (EditText) findViewById(R.id.usernameEditText);
-         username.setText("");
-         EditText password = (EditText) findViewById(R.id.passwordEditText);
-         password.setText("");
+         usernameEditText.setText("");
+         passwordEditText.setText("");
      }
 
      //the login button onclick function
      public void loginAction(View v) {
-         EditText usernameEditText = (EditText) findViewById(R.id.usernameEditText);
-         EditText passwordEditText = (EditText) findViewById(R.id.passwordEditText);
          String username = usernameEditText.getText().toString();
          String password = passwordEditText.getText().toString();
 

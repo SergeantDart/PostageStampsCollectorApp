@@ -6,6 +6,7 @@ import androidx.room.Room;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -60,9 +61,11 @@ public class CollectionCreationActivity extends AppCompatActivity {
         int height = dm.heightPixels;
         getWindow().setLayout((int) (width * 0.9), (int) (height * 0.9));
 
+        //set public accesability by default
+        RadioButton publicAccesabilityRadioButton = (RadioButton) findViewById(R.id.publicRadioButton);
+        publicAccesabilityRadioButton.setChecked(true);
+
     }
-
-
 
     //the create new collection button onclick function
     public void createNewCollection(View v) {
@@ -73,31 +76,32 @@ public class CollectionCreationActivity extends AppCompatActivity {
 
         collectionName = collectionNameEditText.getText().toString();
         collectionDescription = collectionDescriptionEditText.getText().toString();
-        String choice = ((RadioButton) findViewById(collectionAccesabilitRadioGroup.getCheckedRadioButtonId())).getText().toString();
 
-        if (choice == "Private") {
+        RadioGroup accesabilityRadioGroup = (RadioGroup) findViewById(R.id.collectionAccesabilityRadioGroup);
+        RadioButton choiceButton = (RadioButton) findViewById(accesabilityRadioGroup.getCheckedRadioButtonId());
+        String choice = choiceButton.getText().toString();
+
+
+        if (choice.equals("Private")) {
             isPrivate = true;
-        } else if (choice == "Public") {
+        } else if (choice.equals("Public")) {
             isPrivate = false;
         }
-        // else choice="";
 
-        Log.i("inf", choice);
-
-        //TRB SA LUCREZ AICI
-        if (!collectionName.equals("") && !collectionDescription.equals("") && collectionAccesabilitRadioGroup.getCheckedRadioButtonId() != -1) {
-
+        if (collectionName.equals("")) {
+            Toast.makeText(getApplicationContext(), "Add a name to your collection !", Toast.LENGTH_SHORT).show();
+        } else if (collectionDescription.equals("") || collectionDescription.length() < 10) {
+            Toast.makeText(getApplicationContext(), "The collection description must be at least 10 characters long !", Toast.LENGTH_SHORT).show();
+        }else{
             StampsCollection sc = new StampsCollection(userId, collectionName, isPrivate, collectionDescription);
             new InsertStampCollectionAsyncTask(stampsCollectionDao).execute(sc);
-        } else if (collectionName.equals("")) {
-            Toast.makeText(getApplicationContext(), "Add a name to your collection!", Toast.LENGTH_SHORT).show();
-        } else if (collectionDescription.equals("")) {
-            Toast.makeText(getApplicationContext(), "Add a description to your collection!", Toast.LENGTH_SHORT).show();
-        } else if (collectionAccesabilitRadioGroup.getCheckedRadioButtonId() == -1) {
-            Toast.makeText(getApplicationContext(), "Check an option!", Toast.LENGTH_SHORT).show();
-        } else
-            Toast.makeText(getApplicationContext(), "Incomplete data!", Toast.LENGTH_SHORT).show();
+        }
+    }
 
+    public void cancelCollectionCreation(View v){
+        Intent intent = new Intent();
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
     //async task for adding and inserting a new collection to the DB

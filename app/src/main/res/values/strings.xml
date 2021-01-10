@@ -77,4 +77,6 @@
     <string name="ProfileModifyButton">MODIFY</string>
     <string name="WannaChangeYourProfile">Wanna change your profile ?</string>
 
+    <string name="LastLoggedInTimeStamp">Last logged in: </string>
+
 </resources>

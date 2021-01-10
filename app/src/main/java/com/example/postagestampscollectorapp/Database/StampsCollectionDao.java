@@ -22,4 +22,7 @@ public interface StampsCollectionDao {
 
     @Query("DELETE FROM Collections")
     public void deleteAllCollections();
+
+    @Query("DELETE FROM Collections WHERE id = :collectionId")
+    public void deleteCollectionById(int collectionId);
 }
