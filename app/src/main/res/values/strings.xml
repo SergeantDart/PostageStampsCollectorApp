@@ -79,4 +79,6 @@
 
     <string name="LastLoggedInTimeStamp">Last logged in: </string>
 
+    <string name="AppName">PhilaFun</string>
+
 </resources>
