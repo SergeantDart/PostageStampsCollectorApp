@@ -182,6 +182,8 @@ public class SearchOtherUsersActivity extends AppCompatActivity {
 
         postageStampsList = new ArrayList<>();
 
+        usernamesListView.setVisibility(View.INVISIBLE);
+
         usernameAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, usernamesList);
 
         usernamesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
